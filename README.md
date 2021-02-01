@@ -9,7 +9,7 @@ This project provides a user interface to upload photos to the archive on remote
 
 
 ## Architecture Diagram
-![Architecture](Design Documents/architecture.png)
+![Architecture](Design_Documents/architecture.png)
 
 
 ## Team Introduction
