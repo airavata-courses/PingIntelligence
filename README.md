@@ -10,7 +10,7 @@
 
 
 ## Napkin Diagram
-
+![Architecture](Design_Documents/napkin_diagram.png)
 
 ## Architecture Diagram
 ![Architecture](Design_Documents/architecture.png)
