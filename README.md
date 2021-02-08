@@ -16,7 +16,7 @@ The user can upload photos and store it in personalized albums. User can also sh
 The user can keep albums as private as a personal backup option.
 The user has the ability to browse all photos uploaded by him/her and also browse albums shared with the users by other users.
 The filter feature enables the user just view images which meet a certain criteria like pictures taken on a specific date or pictures above or below a certain resolution.
-![Architecture](Design_Documents/napkin_diagram.png)
+![Napkin](Design_Documents/napkin_diagram.PNG)
 
 
 ## Architecture Diagram
