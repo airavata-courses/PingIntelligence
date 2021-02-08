@@ -15,6 +15,20 @@
 ## Architecture Diagram
 ![Architecture](Design_Documents/architecture.png)
 
+## Sign Up Page
+![sign up](Design_Documents/sign up.JPG)
+
+## Sign IN Page
+![sign in](Design_Documents/signin.JPG)
+
+## Upload Images Page
+![Upload page](Design_Documents/upload page.JPG)
+
+
+## Photo Browsing Page
+![Browsing Page](Browsingphotos page.JPG)
+
+
 
 ## Team Introduction
 
