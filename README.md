@@ -16,7 +16,8 @@
 ![Architecture](Design_Documents/architecture.png)
 
 ## Sign Up Page
-(Design_Documents/sign up.JPG)
+
+![Alt text](sign up page.JPG)
 
 ## Sign IN Page
 (Design_Documents/signin.JPG)
