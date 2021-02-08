@@ -1,4 +1,7 @@
-# PingIntelligence
+<p align="center">
+  <img width="280" height="200"
+  src="Design_Documents/Logo/logo.JPG">
+</p>
 
 ## Project Overview
 
