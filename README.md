@@ -17,7 +17,7 @@
 
 ## Sign Up Page
 
-![Alt text](sign up page.JPG)
+![Alt text](./sign up page.JPG)
 
 ## Sign IN Page
 (Design_Documents/signin.JPG)
