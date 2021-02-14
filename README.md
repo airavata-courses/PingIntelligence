@@ -26,6 +26,45 @@ The filter feature enables the user just view images which meet a certain criter
 ## Architecture Diagram
 ![Architecture](Design_Documents/architecture.png)
 
+## How to use?
+> git clone "https://github.com/eayoungs/react-django-login-example.git"
+
+#### Open a Terminal for Front-end
+
+> cd react-django-login\frontend
+
+> npm install
+
+> npm start
+
+#### Open a Terminal for Back-end
+
+> cd react-django-login\backend
+
+> python -m venv backend_env
+
+> backend_env\Scripts\activate.bat
+
+> install django-debug-toolbar
+
+> pip install django-cors-headers
+
+> pip install djangorestframework
+
+> pip install djoser
+
+> pip install django-rest-swagger
+
+> pip install djangorestframework-jwt
+
+> python manage.py makemigrations custom_user
+
+> python manage.py migrate
+
+> python manage.py createsuperuser
+
+> python manage.py runserver
+
 
 ## Team Introduction
 
