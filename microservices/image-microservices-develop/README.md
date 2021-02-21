@@ -1,8 +1,5 @@
-# Image Microservice
-A set of microservices to store, host and manipulate image files using a rest api
-
-## Architecture
-Services:
+# Microservices
+# Services:
 1. image-storage - Stores uploaded images and serves them back to the consumer
 2. image-storage-db - A postgres container to store image metadata
 3. image-transform - Takes a uploaded image, url or image_id for above service and transforms the iamge according to the passed parameters
