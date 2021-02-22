@@ -1,5 +1,4 @@
-# Image Microservice
-A set of microservices to store, host and manipulate image files using a rest api
+## Microservices
 
 ## Architecture
 Services:
