@@ -1,0 +1,9 @@
+django
+djangorestframework
+mysqlclient
+django-mysql
+django-cors-headers
+pymysql
+cryptography
+django-googledrive-storage
+pillow
