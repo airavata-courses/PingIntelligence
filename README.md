@@ -39,7 +39,7 @@ The filter feature enables the user just view images which meet a certain criter
 > Note: Current configuration does not work for registering new user. Login can be made using username: user & password: abcd.
 
 
-### Gateway API Service (Spring Boot)
+### Gateway API Service & User Management Service (Spring Boot)
 > cd restful-web-services/
 
 > Import As "Existing Maven Project" into the IDE.
