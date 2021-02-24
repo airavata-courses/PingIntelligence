@@ -27,7 +27,7 @@ The filter feature enables the user just view images which meet a certain criter
 ![Architecture](Design_Documents/architecture.png)
 
 ## How to use?
-> git clone git@github.com:airavata-courses/PingIntelligence.git
+> git clone --recurse-submodules git@github.com:airavata-courses/PingIntelligence.git
 
 ### Front-End (React JS)
 > cd front-end/
