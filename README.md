@@ -1,11 +1,9 @@
-<<<<<<< HEAD
 # PingIntelligence
-=======
+
 <p align="center">
   <img width="280" height="200"
   src="Design_Documents/Logo/logo.JPG">
 </p>
->>>>>>> 38eacef2ceb591555cf253deb62ffbc2689c0ac1
 
 ## Project Overview
 
@@ -17,12 +15,10 @@
 
 
 ## Napkin Diagram
-<<<<<<< HEAD
 Ping Intelligence is a personal photo sharing and backup application which will enable to users and its groups to store memories.
-=======
 
 <div style="text-align: justify"> Ping Intelligence is a personal photo sharing and backup application which will enable to users and its groups to store memories.
->>>>>>> 38eacef2ceb591555cf253deb62ffbc2689c0ac1
+
 User has the ability to organize their photos into albums.
 The user can upload photos and store it in personalized albums. User can also share these albums with other users.
 The user can keep albums as private as a personal backup option.
@@ -31,17 +27,15 @@ The user has the ability to browse all photos uploaded by him/her and also brows
 The filter feature enables the user just view images which meet a certain criteria like pictures taken on a specific date or pictures above or below a certain resolution.
 ![Napkin](Design_Documents/napkin_diagram.PNG)
 
-=======
+
 The filter feature enables the user just view images which meet a certain criteria like pictures taken on a specific date or pictures above or below a certain resolution.</div></br>
 
 ![Napkin](Design_Documents/napkin_diagram.PNG)
->>>>>>> 38eacef2ceb591555cf253deb62ffbc2689c0ac1
+
 
 ## Architecture Diagram
 ![Architecture](Design_Documents/architecture.png)
 
-<<<<<<< HEAD
-=======
 ## How to use?
 > git clone "https://github.com/eayoungs/react-django-login-example.git"
 
@@ -81,7 +75,7 @@ The filter feature enables the user just view images which meet a certain criter
 
 > python manage.py runserver
 
->>>>>>> 38eacef2ceb591555cf253deb62ffbc2689c0ac1
+
 
 ## Team Introduction
 
