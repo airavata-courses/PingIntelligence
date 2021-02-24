@@ -74,6 +74,28 @@ The filter feature enables the user just view images which meet a certain criter
 
 
 
+### Upload Image Microservice (Django)
+> cd upload-image-microservice
+
+> Open Command prompt in this directory and create virtual environment
+> python -m venv venv
+> .\venv\Scripts\activate
+
+> Install required libraries from requirements.txt
+> pip install -r requirements.txt
+
+> Create your Google Drive API credentials.json file (https://developers.google.com/drive/api/v3/quickstart/python)
+> save the credentials.json file in upload-image-microservice\uploadImage\google-drive-upload folder
+
+> Start the microservice
+> go to uploadImage folder
+> python manage.py runserver
+
+Note: First time when you run the drive-upload file, Google account will need to be verified in browser
+
+
+
+
 
 
 ## Team Introduction
