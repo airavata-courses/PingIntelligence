@@ -27,43 +27,42 @@ The filter feature enables the user just view images which meet a certain criter
 ![Architecture](Design_Documents/architecture.png)
 
 ## How to use?
-> git clone "https://github.com/eayoungs/react-django-login-example.git"
+> git clone git@github.com:airavata-courses/PingIntelligence.git
 
-#### Open a Terminal for Front-end
-
-> cd react-django-login\frontend
+### Front-End (React JS)
+> cd front-end/
 
 > npm install
 
 > npm start
 
-#### Open a Terminal for Back-end
+> Note: Current configuration does not work for registering new user. Login can be made using username: user & password: abcd.
 
-> cd react-django-login\backend
 
-> python -m venv backend_env
+### Gateway API Service (Spring Boot)
+> cd restful-web-services/
 
-> backend_env\Scripts\activate.bat
+> Import As "Existing Maven Project" into the IDE.
 
-> install django-debug-toolbar
+> Update the Maven project.
 
-> pip install django-cors-headers
+> Go to pom.xml > right-click > run > maven Build> Enter Goals: clean install > run
 
-> pip install djangorestframework
+> Once Build is Successful go to "RestfulWebServicesApplication.java" > right-click > Run > Run as Spring Boot Application.
 
-> pip install djoser
 
-> pip install django-rest-swagger
+### Metadata Extraction API Service (Spring Boot)
+> cd metadata_extraction_microservice/
 
-> pip install djangorestframework-jwt
+> Import As "Existing Maven Project" into the IDE.
 
-> python manage.py makemigrations custom_user
+> Update the Maven project.
 
-> python manage.py migrate
+> Go to pom.xml > right-click > run > maven Build> Enter Goals: clean install > run
 
-> python manage.py createsuperuser
+> Once Build is Successful go to "App.java" > right-click > Run > Run as Spring Boot Application.
 
-> python manage.py runserver
+
 
 
 ## Team Introduction

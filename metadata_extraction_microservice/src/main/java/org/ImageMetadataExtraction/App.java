@@ -11,7 +11,7 @@ import java.io.IOException;
 public class App 
 {
     public static void main(String[] args) {
-        File file = new File("C:\\Users\\sudip\\Pictures\\luddy.jpg");
+        File file = new File("resources/luddy.jpg");
 
         try {
             Metadata metadata = ImageMetadataReader.readMetadata(file);
