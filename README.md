@@ -1,3 +1,5 @@
+# PingIntelligence
+
 <p align="center">
   <img width="280" height="200"
   src="Design_Documents/Logo/logo.JPG">
@@ -13,8 +15,10 @@
 
 
 ## Napkin Diagram
+Ping Intelligence is a personal photo sharing and backup application which will enable to users and its groups to store memories.
 
 <div style="text-align: justify"> Ping Intelligence is a personal photo sharing and backup application which will enable to users and its groups to store memories.
+
 User has the ability to organize their photos into albums.
 The user can upload photos and store it in personalized albums. User can also share these albums with other users.
 The user can keep albums as private as a personal backup option.
@@ -23,11 +27,16 @@ The filter feature enables the user just view images which meet a certain criter
 
 ![Napkin](Design_Documents/napkin_diagram.PNG)
 
+
 ## Architecture Diagram
 ![Architecture](Design_Documents/architecture.png)
 
 ## How to use?
+<<<<<<< HEAD
 > git clone git@github.com:airavata-courses/PingIntelligence.git
+=======
+> git clone --recurse-submodules git@github.com:airavata-courses/PingIntelligence.git
+>>>>>>> main
 
 ### Front-End (React JS)
 > cd front-end/
@@ -38,6 +47,7 @@ The filter feature enables the user just view images which meet a certain criter
 
 > Note: Current configuration does not work for registering new user. Login can be made using username: user & password: abcd.
 
+<<<<<<< HEAD
 
 ### Gateway API Service (Spring Boot)
 > cd restful-web-services/
@@ -61,6 +71,56 @@ The filter feature enables the user just view images which meet a certain criter
 > Go to pom.xml > right-click > run > maven Build> Enter Goals: clean install > run
 
 > Once Build is Successful go to "App.java" > right-click > Run > Run as Spring Boot Application.
+
+
+=======
+
+### Gateway API Service & User Management Service (Spring Boot)
+> cd restful-web-services/
+
+> Import As "Existing Maven Project" into the IDE.
+
+> Update the Maven project.
+
+> Go to pom.xml > right-click > run > maven Build> Enter Goals: clean install > run
+
+> Once Build is Successful go to "RestfulWebServicesApplication.java" > right-click > Run > Run as Spring Boot Application.
+
+
+### Metadata Extraction API Service (Spring Boot)
+> cd metadata_extraction_microservice/
+
+> Import As "Existing Maven Project" into the IDE.
+
+> Update the Maven project.
+
+> Go to pom.xml > right-click > run > maven Build> Enter Goals: clean install > run
+
+> Once Build is Successful go to "App.java" > right-click > Run > Run as Spring Boot Application.
+
+
+
+### Upload Image Microservice (Django)
+> cd upload-image-microservice
+
+> Open Command prompt in this directory and create virtual environment
+> python -m venv venv
+> .\venv\Scripts\activate
+
+> Install required libraries from requirements.txt
+> pip install -r requirements.txt
+
+> Create your Google Drive API credentials.json file (https://developers.google.com/drive/api/v3/quickstart/python)
+> save the credentials.json file in upload-image-microservice\uploadImage\google-drive-upload folder
+
+> Start the microservice
+> go to uploadImage folder
+> python manage.py runserver
+>>>>>>> main
+
+Note: First time when you run the drive-upload file, Google account will need to be verified in browser
+
+
 
 
 
