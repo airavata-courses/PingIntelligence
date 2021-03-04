@@ -1,0 +1,5 @@
+docker build -f Dockerfile -t user-mgmt-image .
+
+docker run -p 8080:8080 user-mgmt-image
+
+docker-compose up -d
