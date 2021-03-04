@@ -1,8 +1,15 @@
 package com.iu.photosquad.mainuploadmgmt.mainuploadmgmt.controller;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -11,9 +18,11 @@ import java.util.Set;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
+import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.FileSystemResource;
+import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -79,13 +88,53 @@ public class PhotoController {
 	}
 	
 	@GetMapping(path="/download")
-	public ResponseEntity<?> share(@RequestParam int ids) throws FileNotFoundException{
+	public ResponseEntity<?> download(@RequestParam int ids) throws FileNotFoundException{
 		Photo ab = photorepo.findById(ids);
+		byte[] encoded = Base64.getEncoder().encode(ab.getData());
+		return ResponseEntity.ok(encoded);
 
-	     return ResponseEntity.ok()
-	             .contentType(MediaType.parseMediaType("image/png"))
-	             .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + "hello.png" + "\"")
+//	     return ResponseEntity.ok()
+//	             .contentType(MediaType.parseMediaType("image/jpeg"))
+//	             .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + (ab.getPhotoname() +  Math.random())+ "\"")
+//	             .body(new ByteArrayResource(ab.getData()));
+
+	}
+	
+	@PostMapping(path="/multipledownloads")
+	public ResponseEntity<?> getArticleImage(@RequestParam("postss") List<Integer> id) throws IOException {
+		ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+	    BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(byteArrayOutputStream);
+	    ZipOutputStream zipOutputStream = new ZipOutputStream(bufferedOutputStream);
+
+		List<byte[]> lb = new ArrayList<byte[]>();
+		int count = 0;
+		for(int i : id) {
+			Photo pic = photorepo.findById(i);
+			zipOutputStream.putNextEntry(new ZipEntry(pic.getPhotoname() + count++));
+			InputStream myInputStream = new ByteArrayInputStream(pic.getData()); 
+
+	        BufferedInputStream fileInputStream = new BufferedInputStream(myInputStream);
+
+	        IOUtils.copy(fileInputStream, zipOutputStream);
+
+	        fileInputStream.close();
+	        zipOutputStream.closeEntry();
+		}
+		IOUtils.closeQuietly(bufferedOutputStream);
+	    IOUtils.closeQuietly(byteArrayOutputStream);
+	    
+	    
+		
+	    return new ResponseEntity<byte[]>(byteArrayOutputStream.toByteArray(), HttpStatus.ACCEPTED);
+	}
+	
+	@GetMapping(path="/open")
+	public ResponseEntity<?> viewPhoto(@RequestParam("ids") int ids){
+		Photo ab = photorepo.findById(ids);
+		return ResponseEntity.ok()
+	             .contentType(MediaType.parseMediaType("image/jpeg"))
+	             .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + (ab.getPhotoname() +  Math.random())+ "\"")
 	             .body(new ByteArrayResource(ab.getData()));
-
+		
 	}
 }

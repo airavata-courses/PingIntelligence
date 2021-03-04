@@ -1,7 +1,9 @@
 1.
-> git clone https://github.com/airavata-courses/PixelSquad.git
+> git clone git@github.com:airavata-courses/PingIntelligence.git
 
-> cd /apigateway
+> git checkout milestone_2
+
+> cd apigateway/
 
 2. install npm and node.js (if doesn't have already)
 3. install dependencies

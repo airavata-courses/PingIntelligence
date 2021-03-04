@@ -1,6 +1,8 @@
 1.
 
-> git clone https://github.com/airavata-courses/PixelSquad.git
+> git clone git@github.com:airavata-courses/PingIntelligence.git
+
+> git checkout milestone_2
 
 > cd metadataextractorsearch/
 

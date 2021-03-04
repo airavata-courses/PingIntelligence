@@ -1,24 +1,41 @@
 package com.iu.photosquad.mainuploadmgmt.mainuploadmgmt.controller;
 
+import java.awt.image.BufferedImage;
+import java.io.BufferedOutputStream;
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.InputStream;
 import java.io.ObjectOutputStream;
+import java.nio.file.Files;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipOutputStream;
+
+import javax.imageio.ImageIO;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.swing.JFileChooser;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.StreamUtils;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -32,6 +49,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.iu.photosquad.mainuploadmgmt.mainuploadmgmt.Dto.AlbumModel;
 import com.iu.photosquad.mainuploadmgmt.mainuploadmgmt.Dto.KafkaAlbumModel;
+import com.iu.photosquad.mainuploadmgmt.mainuploadmgmt.Dto.LocateAlbumDTO;
 import com.iu.photosquad.mainuploadmgmt.mainuploadmgmt.Dto.ShareAlbumModel;
 import com.iu.photosquad.mainuploadmgmt.mainuploadmgmt.Dto.TotalAlbumsPerUser;
 import com.iu.photosquad.mainuploadmgmt.mainuploadmgmt.Dto.UserResponse;
@@ -63,7 +81,7 @@ public class AlbumController {
 	@Autowired
 	private KafkaTemplate<String,KafkaAlbumModel> template;
 	
-	private String topic = "album";
+	private String topic = "test";
 	
 	@PostMapping(path="/create")
 	public ResponseEntity<?> create(@RequestBody AlbumModel album) {
@@ -105,16 +123,16 @@ public class AlbumController {
 	@PostMapping(path = "/upload")
 	public ResponseEntity<?> createNewObjectWithImage(@RequestParam("files") MultipartFile[] files,
 		      @RequestParam("albumname") String albumname,@RequestParam("sharedusers") List<String> users,
-		      @RequestParam("photoname") String photoname) throws Exception {
+		      @RequestParam("photoname") List<String> photoname) throws Exception {
 
 		System.out.println(files.toString());
 		
 		Set<Photo> photoset = new HashSet<>();
 		List<Photo> kafkaphotos = new ArrayList<>();
-		
+		int count = 0;
 		for(MultipartFile mf : files) {
 			Photo pic = new Photo();
-			pic.setPhotoname(photoname + String.valueOf((int) Math.random()));
+			pic.setPhotoname(photoname.get(count));
 			pic.setAlbum_id(albumrepo.findByAlbumname(albumname).getId());
 			pic.setAnnotationtags("hello1");
 			pic.setCreatedAt(LocalDate.now());
@@ -124,6 +142,7 @@ public class AlbumController {
 			pic.setData(mf.getBytes());
 			photoset.add(pic);
 			kafkaphotos.add(pic);
+			count++;
 		}
 
 		List<String> usernames = new ArrayList<>();
@@ -189,7 +208,7 @@ public class AlbumController {
 		KafkaAlbumModel kam = new KafkaAlbumModel();
 		kam.setPhotos(kafkaphotos);
 		kam.setAlbumname(albumname);
-//		template.send(topic,"album",kam);
+		template.send(topic,"test",kam);
 		System.out.println("album sent to google");
 		return ResponseEntity.ok("200");
 	}
@@ -209,13 +228,33 @@ public class AlbumController {
 	
 	@GetMapping(path="/locatealbum")
 	public ResponseEntity<?> findonealbum(@RequestParam String albumname) {
-		HashMap<String,Album> singlealbumresponse = new HashMap<>();
+		HashMap<String,List<LocateAlbumDTO>> singlealbumresponse = new HashMap<>();
 		try {
 				Album u = albumrepo.findByAlbumname(albumname);
-				System.out.println(u);
-//			if(u != null || (u instanceof Album)) {
-//				
-				singlealbumresponse.put("albums", u);
+//				System.out.println(u);
+				List<LocateAlbumDTO> la = new ArrayList<>();
+				List<Photo> allphotos = u.getPhotos();
+				for(Photo p : allphotos) {
+					LocateAlbumDTO ladt = new LocateAlbumDTO();
+					ladt.setId(p.getId());
+					ladt.setAnnotationtags(p.getAnnotationtags());
+					ladt.setCreatedAt(p.getCreatedAt());
+					ladt.setUpdatedAt(p.getUpdatedAt());
+					ladt.setPhotoname(p.getPhotoname());
+					ladt.setDescription(p.getDescription());
+					ladt.setSharedwith(p.getUsers());
+//					BufferedImage bImage = ImageIO.read(new File(p.getPhotoname() +".jpg"));
+//				    ByteArrayOutputStream bos = new ByteArrayOutputStream();
+//				    ImageIO.write(bImage, "jpg", bos );
+//				    byte [] data = bos.toByteArray();
+//				    ByteArrayInputStream bis = new ByteArrayInputStream(data);
+//				    BufferedImage bImage2 = ImageIO.read(bis);
+//				    ImageIO.write(bImage2, "jpg", new File("output.jpg") );
+//					ladt.setImage(bImage2);
+					la.add(ladt);
+				}
+
+				singlealbumresponse.put("albums", la);
 //			}
 		}
 		catch(Exception e){
@@ -330,17 +369,40 @@ public class AlbumController {
 		return ResponseEntity.ok(shareresponse);
 	}
 	
-	@GetMapping(path="/download")
-	public ResponseEntity<?> download(@RequestParam String albumname) throws FileNotFoundException{
+//	@GetMapping(path="/download")
+////	public ResponseEntity<?> download(@RequestParam String ) throws FileNotFoundException{
+////
+////
+////		Album ab = albumrepo.findByAlbumname(albumname);
+////		
+//
+////		File someFile = new File("someFile.zip");
+////		final JFileChooser fc = new JFileChooser();
+////
+////		File files[] = fc.getSelectedFiles();
+////		BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(someFile));
+////		
+////		// Create the ZIP file first
+////		try (ZipOutputStream out = new ZipOutputStream(bos)) {
+////		    // Write files/copy to archive
+////		    for (Photo file : ab.getPhotos()) {
+////		        // Put a new ZIP entry to output stream for every file
+////		        out.putNextEntry(new ZipEntry(Base64.getEncoder().encodeToString(file.getData())));
+////		        Files.copy("/Downloads", out);
+////		        out.closeEntry();
+////		    }
+////		}
+//
+//	     return ResponseEntity.ok()
+//	             .contentType(MediaType.parseMediaType("image/jpg"))
+//	             .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + "hello.jpg" + "\"")
+//	             .body(new ByteArrayResource(ab.getPhotos().get(0).getData()));
+//
+//	
+//}
+	
+	
 
-
-		Album ab = albumrepo.findByAlbumname(albumname);
-
-	     return ResponseEntity.ok()
-	             .contentType(MediaType.parseMediaType("image/png"))
-	             .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + "hello.png" + "\"")
-	             .body(new ByteArrayResource(ab.getPhotos().get(0).getData()));
 
 	
-}
 }

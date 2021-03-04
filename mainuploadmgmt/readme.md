@@ -1,8 +1,10 @@
-1. Install java and Eclipse/IntelliJ IDE (if not already present).
+1.Install java and Eclipse/IntelliJ IDE (if not already present).
 
-2. 
+2.
 
-> git clone https://github.com/airavata-courses/PixelSquad.git
+> git clone git@github.com:airavata-courses/PingIntelligence.git
+
+> git checkout milestone_2
 
 > cd mainuploadmgmt/
 

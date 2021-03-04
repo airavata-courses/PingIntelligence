@@ -1,8 +1,10 @@
 1.
 
-> git clone https://github.com/airavata-courses/PixelSquad.git
+> git clone git@github.com:airavata-courses/PingIntelligence.git
 
-> cd photosquadui/
+> git checkout milestone_2
+
+> cd ui/
 
 2.Install npm and node.js (if not present already).
 

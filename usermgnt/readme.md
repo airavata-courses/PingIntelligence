@@ -2,9 +2,11 @@
 
 2.
 
-> git clone https://github.com/airavata-courses/PixelSquad.git
+> git clone git@github.com:airavata-courses/PingIntelligence.git
 
-> cd photosquadusermgnt/
+> git checkout milestone_2
+
+> cd usermgnt/
 
 3. Open this directory in the IDE. Set up the eclipse project with the pom.xml
 

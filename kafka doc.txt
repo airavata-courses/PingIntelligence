@@ -1,0 +1,22 @@
+kafka version : kafka_2.12-2.2.0
+
+to start zookeeper : to go this path 
+18126@DESKTOP-2ORIMG7 MINGW64 ~/Downloads/kafka_2.12-2.2.0/bin/windows
+$ pwd
+/c/Users/18126/Downloads/kafka_2.12-2.2.0/bin/windows
+
+then > put below script for zookeeper
+zookeeper-server-start.bat ../../config/zookeeper.properties
+
+
+to start kafka : 
+for kafka server go to below path : 
+18126@DESKTOP-2ORIMG7 MINGW64 ~/Downloads/kafka_2.12-2.2.0/bin/windows
+$ pwd
+/c/Users/18126/Downloads/kafka_2.12-2.2.0/bin/windows
+and write for kafka start >>>> 
+
+kafka-server-start.bat ../../config/server.properties
+
+Create topic : topic name is "test"
+kafka-topics -zookeeper localhost:2181 -topic test -create  
