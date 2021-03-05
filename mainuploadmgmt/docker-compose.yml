@@ -1,0 +1,44 @@
+version: '3'
+
+services:
+
+  mysql-container:
+    container_name: mysql-container
+    image: mysql:8.0.19
+    environment:
+      MYSQL_ROOT_PASSWORD: root@123
+      MYSQL_DATABASE: mainphotoupload
+    ports:
+      - 3306:3306
+    volumes:
+      - mysql-data:/var/lib/mysql
+    networks:
+      - upload-mgmt-network
+
+  user-mgmt:
+    image: upload-mgmt-image
+    restart: always
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    ports:
+      - 8090:8090
+    environment:
+      MYSQL_URL: mysql-container:3306
+      MYSQL_USERNAME: root
+      MYSQL_ROOT_PASSWORD: root@123
+      USER_MANAGEMENT_DB: mainphotoupload
+    networks:
+      - upload-mgmt-network
+    depends_on:
+      - mysql-container
+    links:
+      - mysql-container
+
+networks:
+  upload-mgmt-network:
+    driver: bridge
+    
+volumes:
+  mysql-data:
+     driver: local
