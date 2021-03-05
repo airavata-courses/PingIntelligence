@@ -5,6 +5,7 @@ services:
   mysql-container:
     container_name: mysql-container
     image: mysql:8.0.19
+    command: --max_allowed_packet=500M
     environment:
       MYSQL_ROOT_PASSWORD: root@123
       MYSQL_DATABASE: mainphotoupload
