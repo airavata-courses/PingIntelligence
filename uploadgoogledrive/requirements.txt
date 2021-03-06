@@ -1,0 +1,4 @@
+##### Requirements
+
+kafka-python==1.4.7
+requests==2.22.0
