@@ -1,0 +1,16 @@
+web:
+  build: .
+  environment:
+    MYENV: metadata_search
+  volumes:
+    - .:/code
+web_migrate:
+  extends:
+    service: web
+  command: python manage.py migrate
+web_run:
+  extends:
+    service: web
+  command: python manage.py runserver 0.0.0.0:8095
+  ports:
+    - "8095:8095"
