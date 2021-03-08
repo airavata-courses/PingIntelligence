@@ -33,4 +33,10 @@
 
 > cd ../
 
+> cd uploadgoogledrive/
+
+> docker build -f Dockerfile -t upload-google-image .
+
+> cd ../
+
 > docker-compose up -d
