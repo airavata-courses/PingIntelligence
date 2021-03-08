@@ -6,6 +6,8 @@ services:
     environment:
       - MYSQL_ROOT_PASSWORD=root@123
       - MYSQL_DATABASE=UserManagement
+    volumes:
+      - .dbdata:/var/lib/msql
     ports:
       - 3307:3306
   user-mgmt:
@@ -49,6 +51,8 @@ services:
       - MYSQL_TCP_PORT=3308
     ports:
       - 3308:3308
+    volumes:
+      - .dbdata:/var/lib/msql
     expose:
       - 3308
   upload-mgmt:
