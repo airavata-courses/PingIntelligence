@@ -16,6 +16,8 @@ services:
       dockerfile: DockerFile
     depends_on:
       - mysql-user-mgmt
+    restart: always
+
   ui:
     image: ui-image
     ports:
@@ -23,6 +25,8 @@ services:
     build:
       context: ./ui/ui
       dockerfile: DockerFile
+    restart: always
+
   gateway:
     image: gateway-image
     ports:
@@ -30,3 +34,26 @@ services:
     build:
       context: ./gateway/apigateway
       dockerfile: DockerFile
+    restart: always
+  
+  mysql-upload-mgmt:
+    image: mysql:5.7
+    command: --max_allowed_packet=67108864
+    environment:
+      - MYSQL_ROOT_PASSWORD=admin
+      - MYSQL_DATABASE=mainphotoupload
+      - MYSQL_TCP_PORT=3308
+    ports:
+      - 3308:3308
+    expose:
+      - 3308
+  upload-mgmt:
+    image: upload-mgmt-image
+    ports:
+      - 8090:8090
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - mysql-upload-mgmt
+    restart: always

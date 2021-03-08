@@ -9,10 +9,28 @@
 
 ## Steps to run
 
-> docker build -f .\gateway\apigateway\Dockerfile -t gateway-image .
+> cd gateway/apigateway/
 
-> docker build -f .\ui\ui\Dockerfile -t ui-image .
+> docker build -f Dockerfile -t gateway-image .
 
-> docker build -f .\user_management\user_management\Dockerfile -t user-mgmt-image .
+> cd ../..
+
+> cd ui/ui/
+
+> docker build -f Dockerfile -t ui-image .
+
+> cd ../..
+
+> cd user_management/user_management/
+
+> docker build -f Dockerfile -t user-mgmt-image .
+
+> cd ../..
+
+> cd mainuploadmgmt/
+
+> docker build -f Dockerfile -t upload-mgmt-image .
+
+> cd ../
 
 > docker-compose up -d
