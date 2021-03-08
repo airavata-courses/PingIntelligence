@@ -1,0 +1,32 @@
+version: '3'
+services:
+  mysql-user-mgmt:
+    image: mysql:5.7
+    environment:
+      - MYSQL_ROOT_PASSWORD=root@123
+      - MYSQL_DATABASE=UserManagement
+    ports:
+      - 3307:3306
+  user-mgmt:
+    image: user-mgmt-image
+    ports:
+      - 8081:8080
+    build:
+      context: ./user_management/user_management
+      dockerfile: DockerFile
+    depends_on:
+      - mysql-user-mgmt
+  ui:
+    image: ui-image
+    ports:
+      - 3000:3000
+    build:
+      context: ./ui/ui
+      dockerfile: DockerFile
+  gateway:
+    image: gateway-image
+    ports:
+      - 3001:3001
+    build:
+      context: ./gateway/apigateway
+      dockerfile: DockerFile
