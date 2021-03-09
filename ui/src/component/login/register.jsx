@@ -1,7 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import loginImg from "../../login.svg";
-
+//import "./style.css"
+import "../../bootstrap.css"
 
 export class Register extends React.Component{
     constructor(props){
@@ -55,37 +56,34 @@ export class Register extends React.Component{
                 <div className="image">
                     <img src={loginImg}></img>
                 </div>
-                <div className="form">
                     <div className="form-group">
                     <label className="username" htmlFor="username">Username</label>
-                    <input className="username" type="text" name="username" placeholder="username" onChange={this.handleLogin.bind(this)}></input>
-                    </div>
-                    <div className="form-group">
-                    <label className="username" htmlFor="password">Password</label>
-                    <input className="username" type="password" name="password" placeholder="password" onChange={this.handleLogin.bind(this)}></input>
-                    </div>
-                    <div className="form-group">
-                    <label className="username" htmlFor="username">Firstname</label>
-                    <input className="username" type="text" name="firstname" placeholder="firstname" onChange={this.handleLogin.bind(this)}></input>
-                    </div>
-                    <div className="form-group">
-                    <label className="username" htmlFor="username">Lastname</label>
-                    <input className="username" type="text" name="lastname" placeholder="lastname" onChange={this.handleLogin.bind(this)}></input>
-                    </div>
-                    <div className="form-group">
-                    <label className="username" htmlFor="username">Email</label>
-                    <input className="username" type="email" name="emailID" placeholder="emailID" onChange={this.handleLogin.bind(this)}></input>
-                    </div>
-                </div>
-            </div>
-            <div className="footer">
-                <button type="button" className="btn" onClick={this.handleRegister.bind(this)}>
-                    Register
-                </button>
-                <div><Link className="link" to="/login">return to login page</Link></div>
-                
+                    <input className="username" type="text" name="username" placeholder="username" 
+					value = {this.state.username}  onChange={this.handleLogin.bind(this)}></input>
 
+                    <label className="username" htmlFor="password">Password</label>
+                    <input className="username" type="password" name="password" placeholder="password" 
+					value = {this.state.password}  onChange={this.handleLogin.bind(this)}></input>
+                    
+                    <label className="username" htmlFor="username">Firstname</label>
+                    <input className="username" type="text" name="firstname" placeholder="firstname" 
+					value = {this.state.firstname}  onChange={this.handleLogin.bind(this)}></input>
+                    
+                    <label className="username" htmlFor="username">Lastname</label>
+                    <input className="username" type="text" name="lastname" placeholder="lastname" 
+					value = {this.state.lastname}  onChange={this.handleLogin.bind(this)}></input>
+                    
+                    <label className="username" htmlFor="username">Email</label>
+                    <input className="username" type="email" name="emailID" placeholder="emailID" 
+					value = {this.state.emailID}  onChange={this.handleLogin.bind(this)}></input>
+                    </div>
+					
+					<div>
+						<button className="btn btn-success" onClick={this.handleRegister.bind(this)}>Register</button>
+						<div><Link className="link" to="/login">return to login page</Link></div>
+					</div>
             </div>
+            
         </div>
         )
         

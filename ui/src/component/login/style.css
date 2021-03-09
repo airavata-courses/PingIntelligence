@@ -1,6 +1,8 @@
 .form-group{
     display:flex;
     flex-direction: column;
+	margin-top: 35%;
+	margin-right: 30%;
 }
 .username{
    
@@ -14,7 +16,7 @@
     margin-left: 40%;
 }
 
-.btn {
+.btnn {
     margin-top: 2%;
 	box-shadow: 0px 10px 14px -7px #276873;
 	background:linear-gradient(to bottom, #599bb3 5%, #408c99 100%);
