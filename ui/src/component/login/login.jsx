@@ -36,10 +36,10 @@ export class Login extends React.Component{
         fetch(targetUrl, requestOptions)
         .then(async (res) => {
             this.setState({loggedIn : true})
-            console.log("logged in" + this.state.loggedIn)
+            //console.log("logged in" + this.state.loggedIn)
             const data = await res.json()
-            console.log( data["photosquadtoken"]) 
-            console.log( data["username"]) 
+            //console.log( data["photosquadtoken"]) 
+            //console.log( data["username"]) 
             // window.localStorage.setItem('username', data["username"]);
             // window.localStorage.setItem('photosquadtoken', data["photosquadtoken"]);
 			

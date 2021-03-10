@@ -96,7 +96,7 @@ app.post("/verifyusertoken", (req, res) => {
 app.post("/createalbum", (req, res) => {
   console.log(req.body);
   axios
-    .post("http://localhost:8092/album/create", {
+    .post("http://upload-mgmt:8092/album/create", {
       name: req.body.name,
       description: req.body.description,
       firstname: req.body.firstname,
@@ -118,7 +118,7 @@ app.post("/createalbum", (req, res) => {
 app.post("/useralbums", (req, res) => {
   // console.log(req.body)
   axios
-    .get("http://localhost:8092/album/allalbums?username=" + req.body.username)
+    .get("http://upload-mgmt:8092/album/allalbums?username=" + req.body.username)
     .then(function (response) {
       console.log(response.data);
       res.send(response.data);
@@ -149,7 +149,7 @@ app.post("/uploadalbumphotos", (req, res) => {
     
   var options = {
     method: "POST",
-    url: "http://localhost:8092/album/upload",
+    url: "http://upload-mgmt:8092/album/upload",
     headers: {
       "cache-control": "no-cache",
       "content-type": "multipart/form-data",
@@ -185,7 +185,7 @@ app.post("/uploadalbumphotos", (req, res) => {
 app.post("/sharealbum", (req, res) => {
   var options = {
     method: "POST",
-    url: "http://localhost:8092/album/share",
+    url: "http://upload-mgmt:8092/album/share",
     headers: {
       "cache-control": "no-cache",
       "content-type": "application/json",
@@ -208,7 +208,7 @@ app.post("/findonealbum", (req, res) => {
   var options = {
     method: "GET",
     url:
-      "http://localhost:8092/album/locatealbum?albumname=" + req.body.albumname,
+      "http://upload-mgmt:8092/album/locatealbum?albumname=" + req.body.albumname,
   };
   console.log(options);
   request(options, function (error, response, body) {
@@ -270,7 +270,7 @@ app.post("/downloadimage", (req, res) => {
   console.log("idsssssssssssssss" + req.body.ids);
   var options = {
     method: "GET",
-    url: "http://127.0.0.1:8092/photo/download?ids=" + req.body.ids,
+    url: "http://upload-mgmt:8092/photo/download?ids=" + req.body.ids,
   };
   console.log(options);
   request(options, function (error, response, body) {
