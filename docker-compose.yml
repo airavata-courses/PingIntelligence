@@ -1,0 +1,45 @@
+version: '3'
+services:
+  ##### USER MANAGEMENT ###### 
+  mysql-user-mgmt:
+    image: mysql:8.0.19
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=root@123
+      - MYSQL_DATABASE=UserManagement
+    ports:
+      - "3307:3306"
+    volumes:
+      - ./db_data:/var/lib/mysql
+  user-mgmt:
+    image: user-mgmt-image
+    ports:
+      - "8091:8091"
+    build:
+      context: ./user-mgmt-service
+      dockerfile: DockerFile
+    depends_on:
+      - mysql-user-mgmt
+    restart: always
+
+
+  ##### FRONT-END ###### 
+  ui:
+    image: ui-image
+    ports:
+      - "3000:3000"
+    build:
+      context: ./ui
+      dockerfile: DockerFile
+    restart: always
+
+
+  ##### API GATEWAY ###### 
+  gateway:
+    image: gateway-image
+    ports:
+      - "3001:3001"
+    build:
+      context: ./apigateway
+      dockerfile: DockerFile
+    restart: always

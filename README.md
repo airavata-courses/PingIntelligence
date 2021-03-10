@@ -1,132 +1,42 @@
-# PingIntelligence
-
 <p align="center">
   <img width="280" height="200"
-  src="Design_Documents/Logo/logo.JPG">
+  src="https://github.com/airavata-courses/PingIntelligence/blob/main/Design_Documents/Logo/logo.JPG">
 </p>
 
-## Project Overview
+## Dependencies
 
-<div style="text-align: justify"> This project provides a user interface to upload photos to the archive on remote storage servers. It provides pipelines for extracting additional picture metadata using open-source image parsing libraries & Image tags using ML/DL algorithms. The application also enables browsing the photos organized into collections and metadata & tag based searches. It makes use of distributed systems architecture along with Micro-services & Micro-Frontends, and Cloud-Native Architecture principles.</div></br>
+1. <a href="https://docs.docker.com/get-docker/">Docker</a>
 
-<b>Languages Used:</b>
-1. Front-End: <i> React.JS </i>
-2. Back-End: <i> Java, Python, Node.js </i>
+## Steps to run
 
+> cd gateway/apigateway/
 
-## Napkin Diagram
-Ping Intelligence is a personal photo sharing and backup application which will enable to users and its groups to store memories.
+> docker build -f Dockerfile -t gateway-image .
 
-<div style="text-align: justify"> Ping Intelligence is a personal photo sharing and backup application which will enable to users and its groups to store memories.
+> cd ../..
 
-User has the ability to organize their photos into albums.
-The user can upload photos and store it in personalized albums. User can also share these albums with other users.
-The user can keep albums as private as a personal backup option.
-The user has the ability to browse all photos uploaded by him/her and also browse albums shared with the users by other users.
-The filter feature enables the user just view images which meet a certain criteria like pictures taken on a specific date or pictures above or below a certain resolution.</div></br>
+> cd ui/ui/
 
-![Napkin](Design_Documents/napkin_diagram.PNG)
+> docker build -f Dockerfile -t ui-image .
 
+> cd ../..
 
-## Architecture Diagram
-![Architecture](Design_Documents/architecture.png)
+> cd user_management/user_management/
 
-## How to use?
-<<<<<<< HEAD
-> git clone git@github.com:airavata-courses/PingIntelligence.git
-=======
-> git clone --recurse-submodules git@github.com:airavata-courses/PingIntelligence.git
->>>>>>> main
+> docker build -f Dockerfile -t user-mgmt-image .
 
-### Front-End (React JS)
-> cd front-end/
+> cd ../..
 
-> npm install
+> cd mainuploadmgmt/
 
-> npm start
+> docker build -f Dockerfile -t upload-mgmt-image .
 
-> Note: Current configuration does not work for registering new user. Login can be made using username: user & password: abcd.
+> cd ../
 
-<<<<<<< HEAD
+> cd uploadgoogledrive/
 
-### Gateway API Service (Spring Boot)
-> cd restful-web-services/
+> docker build -f Dockerfile -t upload-google-image .
 
-> Import As "Existing Maven Project" into the IDE.
+> cd ../
 
-> Update the Maven project.
-
-> Go to pom.xml > right-click > run > maven Build> Enter Goals: clean install > run
-
-> Once Build is Successful go to "RestfulWebServicesApplication.java" > right-click > Run > Run as Spring Boot Application.
-
-
-### Metadata Extraction API Service (Spring Boot)
-> cd metadata_extraction_microservice/
-
-> Import As "Existing Maven Project" into the IDE.
-
-> Update the Maven project.
-
-> Go to pom.xml > right-click > run > maven Build> Enter Goals: clean install > run
-
-> Once Build is Successful go to "App.java" > right-click > Run > Run as Spring Boot Application.
-
-
-=======
-
-### Gateway API Service & User Management Service (Spring Boot)
-> cd restful-web-services/
-
-> Import As "Existing Maven Project" into the IDE.
-
-> Update the Maven project.
-
-> Go to pom.xml > right-click > run > maven Build> Enter Goals: clean install > run
-
-> Once Build is Successful go to "RestfulWebServicesApplication.java" > right-click > Run > Run as Spring Boot Application.
-
-
-### Metadata Extraction API Service (Spring Boot)
-> cd metadata_extraction_microservice/
-
-> Import As "Existing Maven Project" into the IDE.
-
-> Update the Maven project.
-
-> Go to pom.xml > right-click > run > maven Build> Enter Goals: clean install > run
-
-> Once Build is Successful go to "App.java" > right-click > Run > Run as Spring Boot Application.
-
-
-
-### Upload Image Microservice (Django)
-> cd upload-image-microservice
-
-> Open Command prompt in this directory and create virtual environment
-> python -m venv venv
-> .\venv\Scripts\activate
-
-> Install required libraries from requirements.txt
-> pip install -r requirements.txt
-
-> Create your Google Drive API credentials.json file (https://developers.google.com/drive/api/v3/quickstart/python)
-> save the credentials.json file in upload-image-microservice\uploadImage\google-drive-upload folder
-
-> Start the microservice
-> go to uploadImage folder
-> python manage.py runserver
->>>>>>> main
-
-Note: First time when you run the drive-upload file, Google account will need to be verified in browser
-
-
-
-
-
-
-## Team Introduction
-
-- [Sudip Padhye](https://www.linkedin.com/in/sudippadhye/)
-- [Meet Valia](https://www.linkedin.com/in/meet-valia)
-- [Srikanth Velpuri](https://in.linkedin.com/in/srikanth-velpuri-706314100)
+> docker-compose up -d
