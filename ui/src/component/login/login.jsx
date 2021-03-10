@@ -1,10 +1,11 @@
 import React from "react";
 import loginImg from "../../banner.jpg";
-//import "./style.css"
-import axios from 'axios';
-import { Redirect } from "react-router-dom";
+// import "./style.css"
 import AuthenticationService from './AuthenticationService.js'
 import "../../bootstrap.css"
+import socialMediaAuth from "./auth";
+import {iuProvider, facebookProvider, googleProvider, githubProvider} from '../../config/authMethods';
+import { FacebookLoginButton, MicrosoftLoginButton, GoogleLoginButton, GithubLoginButton } from "react-social-login-buttons";
 
 
 export class Login extends React.Component{
@@ -91,6 +92,26 @@ export class Login extends React.Component{
 
 
     render(){
+
+        const handleOnClick = async (provider) => {
+            await socialMediaAuth(provider).then((res) => {
+                //console.log(res)
+                var firstName = res.displayName.split(" ")[0]
+                var lastName = res.displayName.split(" ")[1]
+                var email = res.email
+                var username = email
+                
+                console.log(firstName)
+                console.log(lastName)
+                console.log(email)
+                console.log(username)
+            }).catch((err) => {
+                console.log("Failed Social Media Login")
+                this.setState({showSuccessMessage:false})
+                this.setState({hasLoginFailed:true})
+            })
+        }
+
         return (
             <div className="base-container">
 			
@@ -116,6 +137,34 @@ export class Login extends React.Component{
 					<div>
 						<button className="btn btn-success" onClick={this.handleSubmit.bind(this)}>Login</button>
                     </div>
+
+                    <br/>
+                    <table width="100%">
+                        <tr>
+                            <td><hr /></td>
+                            <td style={{width: '1px', padding: '0 10px'}}>OR</td>
+                            <td><hr /></td>
+                        </tr>
+                    </table>
+
+                    <div class="col">
+                        <MicrosoftLoginButton  onClick={() => handleOnClick(iuProvider)}>
+                            <span><center>Login with IU</center></span>
+                        </MicrosoftLoginButton >
+
+                        <FacebookLoginButton onClick={() => handleOnClick(facebookProvider)}>
+                            <span><center>Login with Facebook</center></span>
+                        </FacebookLoginButton>
+
+                        <GithubLoginButton  onClick={() => handleOnClick(githubProvider)}>
+                            <span><center>Login with GitHub</center></span>
+                        </GithubLoginButton >
+
+                        <GoogleLoginButton  onClick={() => handleOnClick(googleProvider)}>
+                            <span><center>Login with Google</center></span>
+                        </GoogleLoginButton >
+                    </div>
+
                 </div>
             </div>
             
