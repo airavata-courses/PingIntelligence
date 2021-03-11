@@ -37,12 +37,9 @@ export class Login extends React.Component{
         fetch(targetUrl, requestOptions)
         .then(async (res) => {
             this.setState({loggedIn : true})
-            //console.log("logged in" + this.state.loggedIn)
             const data = await res.json()
-            //console.log( data["photosquadtoken"]) 
-            //console.log( data["username"]) 
-            // window.localStorage.setItem('username', data["username"]);
-            // window.localStorage.setItem('photosquadtoken', data["photosquadtoken"]);
+            window.localStorage.setItem('username', data["username"]);
+            window.localStorage.setItem('photosquadtoken', data["photosquadtoken"]);
 			
 			if(data["username"] === undefined)
 			{
@@ -52,7 +49,6 @@ export class Login extends React.Component{
 			else
 			{			
 				AuthenticationService.registerSuccessfulLoginForJwt(data["username"],data["photosquadtoken"])
-				// this.props.history.push(`/welcome/${this.state.username}`)
 			
 				if (this.state.loggedIn === true){
 					this.props.history.push("/dashboard");
@@ -71,23 +67,7 @@ export class Login extends React.Component{
                 this.setState({showSuccessMessage:false})
                 this.setState({hasLoginFailed:true})
             }                
-            })
-		
-		
-		/*
-		AuthenticationService
-            .executeJwtAuthenticationService(this.state.username, this.state.password)
-            .then((response) => {
-				console.log(response)
-				console.log(response.data.token)
-                AuthenticationService.registerSuccessfulLoginForJwt(this.state.username,response.data.token)
-                this.props.history.push(`/dashboard`)
-            }).catch( () =>{
-                this.setState({showSuccessMessage:false})
-                this.setState({hasLoginFailed:true})
-            })
-		*/
-		
+            })		
     }
 
     handleLogin (ev) {
@@ -111,11 +91,6 @@ export class Login extends React.Component{
                 var emailVar = res.email
                 var usernameVar = emailVar
                 var passwordVar = '$deFAult#paSSwrd*%'
-                
-                //console.log(firstName)
-                //console.log(lastName)
-                //console.log(email)
-                //console.log(username)
 
                 console.log('Trying registering user using Social Media details...')
                 var targetUrl = "http://localhost:3001/register";
@@ -134,8 +109,6 @@ export class Login extends React.Component{
                 .then(async (res) => {
                     this.setState({registered : true})
                     const data = await res.json()
-                    console.log( data["photosquadtoken"]) 
-                    console.log( data["isRegistered"]) 
                     if(data["isRegistered"] === "201 CREATED")
                         this.props.history.push("/dashboard");
                     }).catch((err) => {
