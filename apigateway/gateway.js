@@ -284,7 +284,7 @@ app.post("/downloadimage", (req, res) => {
 app.post("/deletealbum", (req, res) => {
   console.log(req.body);
   axios
-    .post("http://localhost:8092/album/delete", {
+    .post("http://upload-mgmt:8092/album/delete", {
       albumname: req.body.albumname
     })
     .then(function (response) {

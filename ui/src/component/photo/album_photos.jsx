@@ -18,6 +18,7 @@ export class Viewphotos extends React.Component {
       openPhotos: false,
       selectedrowid: "",
       multipleselectedrows: [],
+      selectedphotoname:"",
       prev: ""
     };
  
@@ -30,7 +31,9 @@ export class Viewphotos extends React.Component {
   zip.folder("images");
   var img = zip.folder("images");
   var links;
-  console.log(this.state.multipleselectedrows)
+  // console.log(this.state.multipleselectedrows.filter(function(v){return v!==''}))
+  const uniqueList = [...new Set(this.state.multipleselectedrows.filter(function(v){return v!==''}))]
+  console.log(uniqueList)
   var i;
 
   // var uniqueArray = [];
@@ -41,7 +44,7 @@ export class Viewphotos extends React.Component {
   //               uniqueArray.push(this.state.multipleselectedrows[i]);
   //           }
   //       }
-  for(i = 0; i < this.state.multipleselectedrows.length ; i++){
+  for(i = 0; i < uniqueList.length ; i++){
     var targetUrl = "http://localhost:3001/downloadimage";
     const requestOption_s = {
     method: "POST",
@@ -49,23 +52,22 @@ export class Viewphotos extends React.Component {
            "Content-Type": "application/json",
          },
          body: JSON.stringify({
-           ids: this.state.multipleselectedrows[i],
+           ids: uniqueList[i],
          }),
        };
        fetch(targetUrl, requestOption_s)
        .then((response) => {
         var base64Icon = response.json();
         const img1 = <img style={{width: 50, height: 50}} source={{uri: base64Icon}}/>
-        img.file(this.state.multipleselectedrows[i] + ".jpg",base64Icon,{base64: true});
+        img.file(uniqueList[i] + ".jpg",base64Icon,{base64: true});
         zip.generateAsync({type:"blob"}).then(function(content) {
-        saveAs(content, "edm8.zip");
-  });  
+          saveAs(content, "images.zip");
+      });
     })
-   }
+
+  }
 }
  
-    
-
   maketheview = () => {
     this.setState({openPhotos : true})
   }
@@ -100,6 +102,7 @@ export class Viewphotos extends React.Component {
     if (isSelect) {
       console.log(row.id);
       this.setState({ selectedrowid: row.id });
+      this.setState({ selectedphotoname: row.photoname });
     }
   };
 
@@ -157,10 +160,10 @@ export class Viewphotos extends React.Component {
         dataField: "createdAt",
         text: "Created on",
       },
-      {
-        dataField: "UpdatedAt",
-        text: "Owner",
-      },
+      // {
+      //   dataField: "UpdatedAt",
+      //   text: "Owner",
+      // },
       {
         dataField: "description",
         text: "Description",
@@ -169,10 +172,10 @@ export class Viewphotos extends React.Component {
         dataField: "annotationtags",
         text: "Annotation tags",
       },
-      {
-        dataField: "sharedwith",
-        text: "Shared with",
-      },
+      // {
+      //   dataField: "sharedwith",
+      //   text: "Shared with",
+      // },
       // {
       //   dataField: "image",
       //   text: "Image",
@@ -200,12 +203,12 @@ export class Viewphotos extends React.Component {
             // )
           }
         </div>
-        <div><button type="button" onClick={this.maketheview}>open photo</button></div>
-        <div><button type="button" onClick={this.downloadmultipleimages}>download multiple images</button></div>
+        <div><button type="button" class="myButton" onClick={this.maketheview}>open photo</button></div>
+        <div><button type="button" class="myButton" onClick={this.downloadmultipleimages}>download multiple images</button></div>
         { this.state.openPhotos === true && 
           <Openphoto
-            show={this.state.openPhotos}
-            ids={this.state.selectedrowid}
+            show={this.state.openPhotos} ids={this.state.selectedrowid}
+            photoname={this.state.selectedphotoname} albumname={this.props.location.state.album}
           />
         }
       </div>

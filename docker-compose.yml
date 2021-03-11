@@ -85,7 +85,7 @@ services:
       KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
       KAFKA_LISTENERS: PLAINTEXT://kafka:9092
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-      KAFKA_CREATE_TOPICS: "test1:1:1"
+      KAFKA_CREATE_TOPICS: "test1:1:1, test2:1:1"
       KAFKA_MESSAGE_MAX_BYTES: 30000000 
     volumes:
       - ./docker_volumes/kafka/kafka_data:/var/lib/mysql

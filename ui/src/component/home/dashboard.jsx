@@ -271,6 +271,7 @@ export class Dashboard extends React.Component {
         {this.state.uploadModal === true && (
           <UploadPhotosModal
             show={this.state.uploadModal}
+            albumname={this.state.selectedrowid}
             user={window.localStorage.getItem("username")}
           />
         )}
