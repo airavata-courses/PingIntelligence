@@ -16,15 +16,15 @@ export class Login extends React.Component{
             password:"",
             loggedIn:false,
 			hasLoginFailed: false,
-            showSuccessMessage: false
+            hasSocialMediaLoginFailed: false,
+            showSuccessMessage: false,
+            isSocialMediaLogin: false
         }
         this.handleLogin = this.handleLogin.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     handleSubmit() {
-		
-        console.log(this.state.username)
         var targetUrl = "http://localhost:3001/login";
         const requestOptions = {
         method: "POST",
@@ -59,8 +59,18 @@ export class Login extends React.Component{
 				}
 			}            
         }).catch( () =>{
+            if (this.state.isSocialMediaLogin === true)
+            {
+                this.setState({isSocialMediaLogin:false})
+                this.setState({hasSocialMediaLoginFailed:true})
+                this.setState({showSuccessMessage:false})
+                this.setState({hasLoginFailed:false})
+            }
+            else {
+                this.setState({hasSocialMediaLoginFailed:false})
                 this.setState({showSuccessMessage:false})
                 this.setState({hasLoginFailed:true})
+            }                
             })
 		
 		
@@ -96,15 +106,48 @@ export class Login extends React.Component{
         const handleOnClick = async (provider) => {
             await socialMediaAuth(provider).then((res) => {
                 //console.log(res)
-                var firstName = res.displayName.split(" ")[0]
-                var lastName = res.displayName.split(" ")[1]
-                var email = res.email
-                var username = email
+                var firstNameVar = res.displayName.split(" ")[0]
+                var lastNameVar = res.displayName.split(" ")[1]
+                var emailVar = res.email
+                var usernameVar = emailVar
+                var passwordVar = '$deFAult#paSSwrd*%'
                 
-                console.log(firstName)
-                console.log(lastName)
-                console.log(email)
-                console.log(username)
+                //console.log(firstName)
+                //console.log(lastName)
+                //console.log(email)
+                //console.log(username)
+
+                console.log('Trying registering user using Social Media details...')
+                var targetUrl = "http://localhost:3001/register";
+                const requestOptions = {
+                method: "POST",
+                headers: {'Content-Type': 'application/json', Accept: 'application/json'},
+                body: JSON.stringify({
+                    username: usernameVar,
+                    password: passwordVar,
+                    firstname: firstNameVar,
+                    lastname: lastNameVar,
+                    emailID: emailVar
+                }),
+                };
+                fetch(targetUrl, requestOptions)
+                .then(async (res) => {
+                    this.setState({registered : true})
+                    const data = await res.json()
+                    console.log( data["photosquadtoken"]) 
+                    console.log( data["isRegistered"]) 
+                    if(data["isRegistered"] === "201 CREATED")
+                        this.props.history.push("/dashboard");
+                    }).catch((err) => {
+                        //*** If user already registered then try loggin in */
+                        console.log('Failed registration. This might be due to either network failure or the email already exists!')
+                        this.setState({isSocialMediaLogin: true});
+                        this.setState({username: usernameVar})
+                        this.setState({password: passwordVar})
+                        console.log('Trying logging user using Social Media details...')
+                        this.handleSubmit()
+                    })
+
             }).catch((err) => {
                 console.log("Failed Social Media Login")
                 this.setState({showSuccessMessage:false})
@@ -121,8 +164,9 @@ export class Login extends React.Component{
                 </div>
                 <div className="form-group">
 					<div>
-					{this.state.hasLoginFailed && <div className="alert alert-warning">Invalid Credentials</div>}
-                    {this.state.showSuccessMessage && <div>Login Successful</div>}
+					{this.state.hasLoginFailed && <div className="alert alert-danger">Invalid Credentials</div>}
+                    {this.state.hasSocialMediaLoginFailed && <div className="alert alert-warning">Provided Email Id already registered using App Registration Page. Please Sign In by entering below the username and password.</div>}
+                    {this.state.showSuccessMessage && <div className="alert alert-success">Login Successful</div>}
                     
                     <label className="username" htmlFor="username">Username</label>
                     <input className="username" type="text" name="username" placeholder="username" value={this.state.username}
