@@ -12,14 +12,13 @@ import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.core.ProducerFactory;
 import org.springframework.kafka.support.serializer.JsonSerializer;
 
-import com.iu.photosquad.mainuploadmgmt.mainuploadmgmt.Dto.KafkaAlbumModel;
-import com.iu.photosquad.mainuploadmgmt.mainuploadmgmt.Entity.Album;
+import com.iu.photosquad.mainuploadmgmt.mainuploadmgmt.Dto.DeleteAlbum;
 
 @Configuration
-public class KafkaPublisherConfig {
+public class KafkaPublisherConfig2 {
 	
 	@Bean
-	public ProducerFactory<String,KafkaAlbumModel> producerFactory(){
+	public ProducerFactory<String,DeleteAlbum> producerFactory1(){
 			Map<String,Object> config = new HashMap<>();
 	        config.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "kafka:9092");
 	        config.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
@@ -30,7 +29,10 @@ public class KafkaPublisherConfig {
 	    }
 	
 	@Bean
-	public KafkaTemplate<String, KafkaAlbumModel> kafkaTemplate(){
-		return new KafkaTemplate<>(producerFactory());
+	public KafkaTemplate<String, DeleteAlbum> kafkaTemplate1(){
+		return new KafkaTemplate<>(producerFactory1());
 	}
+
+	
+
 }

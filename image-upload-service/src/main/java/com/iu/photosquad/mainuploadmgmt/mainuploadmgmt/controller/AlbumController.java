@@ -16,6 +16,7 @@ import java.util.Base64;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 import java.util.zip.ZipEntry;
@@ -82,7 +83,11 @@ public class AlbumController {
 	@Autowired
 	private KafkaTemplate<String,KafkaAlbumModel> template;
 	
+	@Autowired
+	private KafkaTemplate<String,DeleteAlbum> template1;
+	
 	private String topic = "test1";
+	private String topic1 = "test2";
 	
 	@PostMapping(path="/create")
 	public ResponseEntity<?> create(@RequestBody AlbumModel album) {
@@ -121,7 +126,8 @@ public class AlbumController {
 	
 	@PostMapping(path = "/upload")
 	public ResponseEntity<?> createNewObjectWithImage(@RequestParam("files") byte[] files,
-		      @RequestParam("albumname") String albumname,@RequestParam("sharedusers") List<String> users,
+		      @RequestParam("albumname") String albumname,
+//		      ,@RequestParam("sharedusers") List<String> users,
 		      @RequestParam("photoname") String photoname) throws Exception {
 
 //		System.out.println(files.toString());
@@ -150,52 +156,52 @@ public class AlbumController {
 		
 		Set<User> albumusers = new HashSet<User>();
 		
-		for(String incominguser : users) {
-			if(userrepo.findByUsername(incominguser) != null) {
-				
-				albumusers.add(userrepo.findByUsername(incominguser));
-			}
-			else {
-				
-				usernames.add(incominguser);
-			}
-		}
-		if(!usernames.isEmpty()) {
-			
-			List<UserResponse> lt = api.getUsersFromUserMgmtDB(usernames);
-			
-			for (UserResponse u : lt) {
-				if(userrepo.findByUsername(u.getUsername()) != null) {
-					User ul = userrepo.findByUsername(u.getUsername());
-					albumusers.add(ul);
-				}
-				HashSet<Album> hs = new HashSet<>();
-				hs.add(albumrepo.findByAlbumname(albumname));
-				User newuser = new User();
-				newuser.setId(u.getId());
-				newuser.setFirstname(u.getFirstname());
-				newuser.setLastname(u.getLastname());
-				newuser.setEmailID(u.getEmailID());
-				newuser.setPassword(u.getPassword());
-				newuser.setUsername(u.getUsername());
-				newuser.setLastUpdated(u.getLastUpdated());
-				newuser.setAlbums(hs);
-				userrepo.save(newuser);
-				albumusers.add(userrepo.findByUsername(u.getUsername()));
-				}
-		}
+//		for(String incominguser : users) {
+//			if(userrepo.findByUsername(incominguser) != null) {
+//				
+//				albumusers.add(userrepo.findByUsername(incominguser));
+//			}
+//			else {
+//				
+//				usernames.add(incominguser);
+//			}
+//		}
+//		if(!usernames.isEmpty()) {
+//			
+//			List<UserResponse> lt = api.getUsersFromUserMgmtDB(usernames);
+//			
+//			for (UserResponse u : lt) {
+//				if(userrepo.findByUsername(u.getUsername()) != null) {
+//					User ul = userrepo.findByUsername(u.getUsername());
+//					albumusers.add(ul);
+//				}
+//				HashSet<Album> hs = new HashSet<>();
+//				hs.add(albumrepo.findByAlbumname(albumname));
+//				User newuser = new User();
+//				newuser.setId(u.getId());
+//				newuser.setFirstname(u.getFirstname());
+//				newuser.setLastname(u.getLastname());
+//				newuser.setEmailID(u.getEmailID());
+//				newuser.setPassword(u.getPassword());
+//				newuser.setUsername(u.getUsername());
+//				newuser.setLastUpdated(u.getLastUpdated());
+//				newuser.setAlbums(hs);
+//				userrepo.save(newuser);
+//				albumusers.add(userrepo.findByUsername(u.getUsername()));
+//				}
+//		}
 		Album parentalbum = albumrepo.findByAlbumname(albumname);
 
-		if(parentalbum.getUsers() != null) {
-			parentalbum.getUsers().addAll(albumusers);
-		}
-		else {
-			Set<User> st = new HashSet<User>(); 
-		    st.addAll(albumusers);
-		    parentalbum.setUsers(st);
-		}
+//		if(parentalbum.getUsers() != null) {
+//			parentalbum.getUsers().addAll(albumusers);
+//		}
+//		else {
+//			Set<User> st = new HashSet<User>(); 
+//		    st.addAll(albumusers);
+//		    parentalbum.setUsers(st);
+//		}
 		
-		parentalbum.getUsers().addAll(albumusers);
+//		parentalbum.getUsers().addAll(albumusers);
 		parentalbum.getPhotos().addAll(photoset);
 
 		
@@ -205,7 +211,7 @@ public class AlbumController {
 		KafkaAlbumModel kam = new KafkaAlbumModel();
 		kam.setPhotos(kafkaphotos);
 		kam.setAlbumname(albumname);
-		template.send(topic,"test1",kam);
+		// template.send(topic,"test1",kam);
 		System.out.println("album sent to google");
 		return ResponseEntity.ok("200");
 	}
@@ -215,10 +221,7 @@ public class AlbumController {
 		HashMap<String,List<Photo>> singlealbumresponse = new HashMap<>();
 
 		Album ab = albumrepo.findByAlbumname(albumname);
-//		List<Photo> lt = photorepo.findByAlbum(albumname);
-//		System.out.println(ab.getPhotos());
 		singlealbumresponse.put("photos", ab.getPhotos());
-//		System.out.println(ab);
 		return ResponseEntity.ok(singlealbumresponse);
 		
 	}
@@ -446,6 +449,10 @@ public class AlbumController {
 	public ResponseEntity<?> deleteAlbum(@RequestBody DeleteAlbum da) {
 //		System.out.println(albumname);
 		Album alb = albumrepo.findByAlbumname(da.getAlbumname());
+		DeleteAlbum albumdata = new DeleteAlbum();
+		albumdata.setAlbumname(alb.getAlbumname());
+		System.out.println(albumdata);
+		template1.send("test2", albumdata);
 		albumrepo.delete(alb);
 		return ResponseEntity.ok("200");
 	}
