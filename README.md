@@ -11,31 +11,31 @@
 
 > cd gateway/apigateway/
 
-> docker build -f Dockerfile -t gateway-image .
+> docker build -f Dockerfile -t pingintelligence/gateway-image .
 
 > cd ../..
 
 > cd ui/ui/
 
-> docker build -f Dockerfile -t ui-image .
+> docker build -f Dockerfile -t pingintelligence/ui-image .
 
 > cd ../..
 
 > cd user_management/user_management/
 
-> docker build -f Dockerfile -t user-mgmt-image .
+> docker build -f Dockerfile -t pingintelligence/user-mgmt-image .
 
 > cd ../..
 
 > cd mainuploadmgmt/
 
-> docker build -f Dockerfile -t upload-mgmt-image .
+> docker build -f Dockerfile -t pingintelligence/upload-mgmt-image .
 
 > cd ../
 
 > cd uploadgoogledrive/
 
-> docker build -f Dockerfile -t upload-google-image .
+> docker build -f Dockerfile -t pingintelligence/upload-google-image .
 
 > cd ../
 
