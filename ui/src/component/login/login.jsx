@@ -85,9 +85,17 @@ export class Login extends React.Component{
 
         const handleOnClick = async (provider) => {
             await socialMediaAuth(provider).then((res) => {
-                //console.log(res)
-                var firstNameVar = res.displayName.split(" ")[0]
-                var lastNameVar = res.displayName.split(" ")[1]
+                if(res.displayName == undefined)
+                {
+                    var firstNameVar = 'socialUserFName'
+                    var lastNameVar = 'socialUserLName'
+                }
+                else
+                {
+                    var firstNameVar = res.displayName.split(" ")[0]
+                    var lastNameVar = res.displayName.split(" ")[1]
+                }
+                
                 var emailVar = res.email
                 var usernameVar = emailVar
                 var passwordVar = '$deFAult#paSSwrd*%'
@@ -109,22 +117,17 @@ export class Login extends React.Component{
                 .then(async (res) => {
                     this.setState({registered : true})
                     const data = await res.json()
-                    if(data["isRegistered"] === "201 CREATED")
-                        this.props.history.push("/dashboard");
-                    }).catch((err) => {
-                        //*** If user already registered then try loggin in */
-                        console.log('Failed registration. This might be due to either network failure or the email already exists!')
-                        this.setState({isSocialMediaLogin: true});
-                        this.setState({username: usernameVar})
-                        this.setState({password: passwordVar})
-                        console.log('Trying logging user using Social Media details...')
-                        this.handleSubmit()
-                    })
-
-            }).catch((err) => {
-                console.log("Failed Social Media Login")
-                this.setState({showSuccessMessage:false})
-                this.setState({hasLoginFailed:true})
+                    
+                    this.setState({isSocialMediaLogin: true});
+                    this.setState({username: usernameVar})
+                    this.setState({password: passwordVar})
+                    console.log('Trying logging user using Social Media details...')
+                    this.handleSubmit()
+                })}).catch((err) => {
+                    console.log(err)
+                    console.log("Failed Social Media Login")
+                    this.setState({showSuccessMessage:false})
+                    this.setState({hasLoginFailed:true})
             })
         }
 
@@ -164,11 +167,12 @@ export class Login extends React.Component{
                         </tr>
                     </table>
 
-                    <div class="col">
+                    <div className="col">
                         <MicrosoftLoginButton  onClick={() => handleOnClick(iuProvider)}>
                             <span><center>Login with IU</center></span>
                         </MicrosoftLoginButton >
 
+                        {/*}
                         <FacebookLoginButton onClick={() => handleOnClick(facebookProvider)}>
                             <span><center>Login with Facebook</center></span>
                         </FacebookLoginButton>
@@ -176,6 +180,8 @@ export class Login extends React.Component{
                         <GithubLoginButton  onClick={() => handleOnClick(githubProvider)}>
                             <span><center>Login with GitHub</center></span>
                         </GithubLoginButton >
+
+                        {*/}
 
                         <GoogleLoginButton  onClick={() => handleOnClick(googleProvider)}>
                             <span><center>Login with Google</center></span>
