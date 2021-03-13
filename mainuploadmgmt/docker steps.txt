@@ -1,5 +1,0 @@
-docker build -f Dockerfile -t upload-mgmt-image .
-
-docker run -p 8090:8090 upload-mgmt-image
-
-docker-compose up -d
