@@ -89,3 +89,36 @@ services:
       KAFKA_MESSAGE_MAX_BYTES: 30000000 
     volumes:
       - ./docker_volumes/kafka/kafka_data:/var/lib/mysql
+
+  #  djangoooooo - google #
+
+  django-google:
+    image: googleupload-image
+    restart: always
+    ports:
+      - "9000:9000" 
+    expose:
+      - 9000
+    build:
+      context: ./googleupload-image
+      dockerfile: DockerFile
+    # command:
+    #   'python manage.py runserver 0.0.0.0:9000'
+
+  # consumer_queue:
+  #   build:
+  #     context: ./googleupload-image/uploadtodrive/
+  #     dockerfile: Dockerfile
+  #   command: 
+  #     python -u /uploadtodrive/uploadgoogle.py
+
+  consumer_queue:
+    image: myconsumer_queue
+    restart: always
+    ports:
+      - "7000:7000" 
+    expose:
+      - 7000
+    build:
+      context: ./kafkafiles
+      dockerfile: DockerFile

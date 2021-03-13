@@ -44,6 +44,8 @@ import com.iu.photosquad.mainuploadmgmt.mainuploadmgmt.Repo.AlbumRepo;
 import com.iu.photosquad.mainuploadmgmt.mainuploadmgmt.Repo.PhotoRepo;
 import com.iu.photosquad.mainuploadmgmt.mainuploadmgmt.Repo.UserRepo;
 import com.iu.photosquad.mainuploadmgmt.mainuploadmgmt.service.RestServiceLocator;
+import com.iu.photosquad.mainuploadmgmt.mainuploadmgmt.Dto.DeletePhoto;
+
 
 @Controller
 @CrossOrigin
@@ -137,4 +139,17 @@ public class PhotoController {
 	             .body(new ByteArrayResource(ab.getData()));
 		
 	}
+
+	@PostMapping(path="/delete")
+	public ResponseEntity<?> deletePhoto(@RequestBody DeletePhoto da) {
+//		System.out.println(albumname);
+		Photo pic = photorepo.findById(da.getPhoto_id());
+//		DeleteAlbum albumdata = new DeleteAlbum();
+//		albumdata.setAlbumname(alb.getAlbumname());
+//		System.out.println(albumdata);
+//		template1.send("test2", albumdata);
+		photorepo.delete(pic);
+		return ResponseEntity.ok("200");
+	}
+	
 }

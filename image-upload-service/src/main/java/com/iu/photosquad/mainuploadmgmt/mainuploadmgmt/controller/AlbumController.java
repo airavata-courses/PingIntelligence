@@ -211,7 +211,7 @@ public class AlbumController {
 		KafkaAlbumModel kam = new KafkaAlbumModel();
 		kam.setPhotos(kafkaphotos);
 		kam.setAlbumname(albumname);
-		// template.send(topic,"test1",kam);
+		template.send(topic,"test1",kam);
 		System.out.println("album sent to google");
 		return ResponseEntity.ok("200");
 	}

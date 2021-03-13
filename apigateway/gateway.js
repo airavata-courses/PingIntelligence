@@ -296,6 +296,23 @@ app.post("/deletealbum", (req, res) => {
     });
 });
 
+app.post("/deletephoto", (req, res) => {
+  console.log(req.body);
+  axios
+    .post("http://upload-mgmt:8092/photo/delete", {
+      photo_id: req.body.ids
+    })
+    .then(function (response) {
+      // console.log(response.data);
+      res.send(response.data);
+    })
+    .catch(function (error) {
+      // console.log(error);
+    });
+});
+
+
+
 app.use(express.json());
 app.listen(PORT, () => {
   console.log("port started on :" + PORT);

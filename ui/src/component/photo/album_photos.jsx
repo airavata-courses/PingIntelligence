@@ -24,6 +24,7 @@ export class Viewphotos extends React.Component {
  
     this.maketheview = this.maketheview.bind(this)
     this.downloadmultipleimages = this.downloadmultipleimages.bind(this)
+    this.deleteImage = this.deleteImage.bind(this)
   }
 
   downloadmultipleimages = () => {
@@ -58,8 +59,11 @@ export class Viewphotos extends React.Component {
        fetch(targetUrl, requestOption_s)
        .then((response) => {
         var base64Icon = response.json();
-        const img1 = <img style={{width: 50, height: 50}} source={{uri: base64Icon}}/>
-        img.file(uniqueList[i] + ".jpg",base64Icon,{base64: true});
+        var j = 0;
+        // const img1 = <img style={{width: 50, height: 50}} source={{uri: base64Icon}}/>
+        for(j ; j < uniqueList.length ; j++){
+          img.file(uniqueList[j] + ".jpg",base64Icon,{base64: true});
+        }
         zip.generateAsync({type:"blob"}).then(function(content) {
           saveAs(content, "images.zip");
       });
@@ -105,6 +109,32 @@ export class Viewphotos extends React.Component {
       this.setState({ selectedphotoname: row.photoname });
     }
   };
+
+  deleteImage = () => {
+    var targetUrl = "http://localhost:3001/deletephoto";
+    const requestOption_s = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        ids: this.state.selectedrowid,
+      }),
+    };
+    console.log(requestOption_s)
+    fetch(targetUrl, requestOption_s, )
+      .then(async (res) => {
+        console.log("photo deleted")
+        // console.log(await res.json())
+        // const data = await res.json()
+        // this.setState({ previewSrc: data})
+        window.localStorage.reload();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+  }
 
   optionFormatter(cell, row, rowIndex) {
     return (
@@ -205,6 +235,7 @@ export class Viewphotos extends React.Component {
         </div>
         <div><button type="button" class="myButton" onClick={this.maketheview}>open photo</button></div>
         <div><button type="button" class="myButton" onClick={this.downloadmultipleimages}>download multiple images</button></div>
+        <div><button type="button" class="myButton" onClick={this.deleteImage}>delete selected image</button></div>
         { this.state.openPhotos === true && 
           <Openphoto
             show={this.state.openPhotos} ids={this.state.selectedrowid}
