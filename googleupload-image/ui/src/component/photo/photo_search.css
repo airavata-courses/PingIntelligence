@@ -1,0 +1,28 @@
+/* input[type=text] {
+    background-color: white;
+    background-image: url('https://img.icons8.com/pastel-glyph/64/000000/search-in-browser--v1.png');
+    background-position: 10px 10px;
+    background-repeat: no-repeat;
+    padding-left: 40px;
+  } */
+
+  .search{
+    background: linear-gradient(to bottom, #77b55a 5%, #72b352 100%);
+    color: white;
+    width: 30%;
+    height: 60px;
+    padding: 12px 20px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    resize: none;
+    margin: 1%;
+  }
+
+  .image{
+    height: 50px;
+  }
+
+  .design{
+      margin:"5%"
+  }

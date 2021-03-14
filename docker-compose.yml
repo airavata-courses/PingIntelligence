@@ -12,9 +12,12 @@ services:
     volumes:
       - ./docker_volumes/user-mgmt/user_mgmt_db_data:/var/lib/mysql
   user-mgmt:
-    image: pingintelligence/user-mgmt-image:latest #user-mgmt-image
+    image: user-mgmt-image
     ports:
       - "8091:8091"
+    build:
+      context: ./user-mgmt-service
+      dockerfile: DockerFile
     depends_on:
       - mysql-user-mgmt
     restart: always
@@ -22,17 +25,23 @@ services:
 
   ##### FRONT-END ###### 
   ui:
-    image: pingintelligence/ui-image:latest
+    image: ui-image
     ports:
       - "3000:3000"
+    build:
+      context: ./ui
+      dockerfile: DockerFile
     restart: always
 
 
   ##### API GATEWAY ###### 
   gateway:
-    image: pingintelligence/gateway-image:latest
+    image: gateway-image
     ports:
       - "3001:3001"
+    build:
+      context: ./apigateway
+      dockerfile: DockerFile
     restart: always
     
   ##### IMAGE UPLOAD SERVICE ######       
@@ -51,10 +60,12 @@ services:
     expose:
       - 3308      
   upload-mgmt:
-    image: pingintelligence/upload-mgmt-image:latest
+    image: upload-mgmt-image
     ports:
       - "8092:8092"
-    #build:
+    build:
+      context: ./image-upload-service
+      dockerfile: DockerFile
     depends_on:
       - mysql-upload-mgmt
     restart: always
@@ -79,19 +90,48 @@ services:
     volumes:
       - ./docker_volumes/kafka/kafka_data:/var/lib/mysql
 
-  ##### Uploading to Google Drive ######  
+  #  djangoooooo - google #
+
   django-google:
-    image: pingintelligence/googleupload-image:latest
+    image: googleupload-image
     restart: always
     ports:
       - "9000:9000" 
     expose:
       - 9000
+    build:
+      context: ./googleupload-image
+      dockerfile: DockerFile
+    # command:
+    #   'python manage.py runserver 0.0.0.0:9000'
+
+  # consumer_queue:
+  #   build:
+  #     context: ./googleupload-image/uploadtodrive/
+  #     dockerfile: Dockerfile
+  #   command: 
+  #     python -u /uploadtodrive/uploadgoogle.py
 
   consumer_queue:
-    image: pingintelligence/consumer-queue-image:latest
+    image: myconsumer_queue
     restart: always
     ports:
       - "7000:7000" 
     expose:
       - 7000
+    build:
+      context: ./kafka_consumer_queue
+      dockerfile: DockerFile
+
+  ###### Metadatasearch #######
+
+  metadata-search:
+    image: metadata-search-service
+    restart: always
+    ports:
+      - "8000:8000" 
+    expose:
+      - 8000
+    build:
+      context: ./metadata-search-service
+      dockerfile: DockerFile
