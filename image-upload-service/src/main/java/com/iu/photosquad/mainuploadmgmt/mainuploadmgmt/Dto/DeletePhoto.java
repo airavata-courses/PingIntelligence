@@ -13,4 +13,5 @@ import lombok.ToString;
 @Data
 public class DeletePhoto {
 	private int photo_id;
+	private String albumname;
 }

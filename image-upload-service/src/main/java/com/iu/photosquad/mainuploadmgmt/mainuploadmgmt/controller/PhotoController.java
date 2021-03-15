@@ -27,6 +27,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StreamUtils;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -38,14 +39,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.iu.photosquad.mainuploadmgmt.mainuploadmgmt.Dto.AlbumModel;
+import com.iu.photosquad.mainuploadmgmt.mainuploadmgmt.Dto.DeleteAlbum;
+import com.iu.photosquad.mainuploadmgmt.mainuploadmgmt.Dto.DeletePhoto;
 import com.iu.photosquad.mainuploadmgmt.mainuploadmgmt.Entity.Album;
 import com.iu.photosquad.mainuploadmgmt.mainuploadmgmt.Entity.Photo;
 import com.iu.photosquad.mainuploadmgmt.mainuploadmgmt.Repo.AlbumRepo;
 import com.iu.photosquad.mainuploadmgmt.mainuploadmgmt.Repo.PhotoRepo;
 import com.iu.photosquad.mainuploadmgmt.mainuploadmgmt.Repo.UserRepo;
 import com.iu.photosquad.mainuploadmgmt.mainuploadmgmt.service.RestServiceLocator;
-import com.iu.photosquad.mainuploadmgmt.mainuploadmgmt.Dto.DeletePhoto;
-
 
 @Controller
 @CrossOrigin
@@ -62,6 +63,9 @@ public class PhotoController {
 	
 	@Autowired
 	private UserRepo userrepo;
+	
+	@Autowired
+	private KafkaTemplate<String,DeleteAlbum> template1;
 	
 	@PostMapping(path = "/uploadphotos")
 	public ResponseEntity<?> createNewObjectWithImage1(@RequestParam("files") MultipartFile[] files,
@@ -137,19 +141,22 @@ public class PhotoController {
 	             .contentType(MediaType.parseMediaType("image/jpeg"))
 	             .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + (ab.getPhotoname() +  Math.random())+ "\"")
 	             .body(new ByteArrayResource(ab.getData()));
-		
 	}
-
+	
 	@PostMapping(path="/delete")
 	public ResponseEntity<?> deletePhoto(@RequestBody DeletePhoto da) {
 //		System.out.println(albumname);
 		Photo pic = photorepo.findById(da.getPhoto_id());
-//		DeleteAlbum albumdata = new DeleteAlbum();
-//		albumdata.setAlbumname(alb.getAlbumname());
-//		System.out.println(albumdata);
-//		template1.send("test2", albumdata);
+		DeleteAlbum albumdata = new DeleteAlbum();
+		albumdata.setAlbumname(da.getAlbumname() + "|" + pic.getPhotoname());
+		System.out.println(albumdata.getAlbumname());
+		template1.send("test2", albumdata);
 		photorepo.delete(pic);
 		return ResponseEntity.ok("200");
 	}
 	
+	// public ResponseEntity<?> sharePhoto(@RequestBody SharePhotoModel spm ){
+	
+	// 	return ResponseEntity.ok("200");
+	// }
 }

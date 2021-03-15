@@ -96,6 +96,7 @@ class Photo(models.Model):
             dict["formats"] = image.format
             dict["image"] = base64.b64encode(metadata)
             dict["albumname"] = self.albumname
+            dict["title"] = self.photoname
             r = requests.post("http://metadata-search:8000/search/images/", data = dict)
             print(r.status_code)
             return super(Photo, self).save(*args, **kwargs)

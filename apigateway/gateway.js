@@ -300,7 +300,8 @@ app.post("/deletephoto", (req, res) => {
   console.log(req.body);
   axios
     .post("http://upload-mgmt:8092/photo/delete", {
-      photo_id: req.body.ids
+      photo_id: req.body.ids,
+      albumname: req.body.albumname
     })
     .then(function (response) {
       // console.log(response.data);

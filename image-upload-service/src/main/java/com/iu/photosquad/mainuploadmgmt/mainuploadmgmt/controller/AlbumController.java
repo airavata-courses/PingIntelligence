@@ -451,8 +451,8 @@ public class AlbumController {
 		Album alb = albumrepo.findByAlbumname(da.getAlbumname());
 		DeleteAlbum albumdata = new DeleteAlbum();
 		albumdata.setAlbumname(alb.getAlbumname());
-		System.out.println(albumdata);
 		template1.send("test2", albumdata);
+		System.out.println("delete album data sent");
 		albumrepo.delete(alb);
 		return ResponseEntity.ok("200");
 	}

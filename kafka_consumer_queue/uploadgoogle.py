@@ -23,7 +23,7 @@ def uploadfiles(albumname,photos):
         print(r.status_code)
 
 def main():
-    import time 
+    # import time 
     while True:
         for message in consumer:
             y = json.loads(message.value)
@@ -32,7 +32,7 @@ def main():
             for i in upload_file_list:
                 uploads.append(i)
             uploadfiles(y["albumname"], uploads)
-            time.sleep(1)
+            # time.sleep(1)
 
 if __name__ == "__main__":
     main()
