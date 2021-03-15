@@ -120,3 +120,5 @@ services:
       - "6500:6500" 
     expose:
       - 6500
+    depends_on:
+      - kafka
