@@ -91,6 +91,7 @@ services:
     depends_on:
       - kafka
 
+  ############# kafka consumer queue 1 (for image add) ############
   consumer_queue:
     image: pingintelligence/consumer-queue-image:latest
     restart: always
@@ -101,18 +102,7 @@ services:
     depends_on:
       - kafka
 
-  ###### Metadatasearch #######
-
-  metadata-search:
-    image: pingintelligence/metadata-search-image:latest
-    restart: always
-    ports:
-      - "8000:8000" 
-    expose:
-      - 8000
-
-  ############# kafka consumer queue 2 ############
-
+  ############# kafka consumer queue 2 (for image delete) ############
   consumer_queue_1:
     image: pingintelligence/consumer-queue-image-1:latest
     restart: always
@@ -122,3 +112,12 @@ services:
       - 6500
     depends_on:
       - kafka
+      
+     ###### Metadatasearch #######
+  metadata-search:
+    image: pingintelligence/metadata-search-image:latest
+    restart: always
+    ports:
+      - "8000:8000" 
+    expose:
+      - 8000
