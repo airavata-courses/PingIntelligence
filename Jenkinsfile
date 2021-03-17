@@ -4,19 +4,20 @@ node{
     }
     stage('Build Docker Image'){    		
         sh  '''
-                sudo apt --assume-yes install docker.io
-                sudo systemctl start docker
-                sudo systemctl enable docker 
+                apt-get update -y
+                apt-get install docker-engine -y
+                systemctl start docker
+                systemctl enable docker 
            
-                sudo docker build -f Dockerfile -t pingintelligence/ui-image .
+                docker build -f Dockerfile -t pingintelligence/ui-image .
             '''    
     }
    
     stage('Push Docker Image'){
        sh '''
-            sudo docker login --username=$DOCKER_USERNAME --password=$DOCKER_PASSWORD &&
-            sudo apt-get upgrade -y &&
-            sudo docker push pingintelligence/ui-image
+            docker login --username=$DOCKER_USERNAME --password=$DOCKER_PASSWORD &&
+            apt-get upgrade -y &&
+            docker push pingintelligence/ui-image
         '''
     }   
 }
