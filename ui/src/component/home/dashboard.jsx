@@ -158,19 +158,19 @@ export class Dashboard extends React.Component {
 
   optionFormatter(cell, row, rowIndex) {
     return (
-      <Dropdown>
+      <Dropdown style={{right:"50%"}}>
         <Dropdown.Toggle variant="success" id="dropdown-basic">
           <button
             type="button"
-            class="btn btn-default dropdown-toggle"
+            class="myButton1"
             data-toggle="dropdown"
             aria-haspopup="true"
             aria-expanded="false"
           >
-            <span
+            <i
               class="glyphicon glyphicon-option-vertical"
               aria-hidden="true"
-            ></span>
+            ></i>
           </button>
         </Dropdown.Toggle>
 

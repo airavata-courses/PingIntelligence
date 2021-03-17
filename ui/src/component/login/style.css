@@ -1,8 +1,16 @@
 .form-group{
     display:flex;
     flex-direction: column;
-	margin-top: 35%;
-	margin-right: 30%;
+    display: inline-block;
+    align-items:initial;
+    /* border: none; */
+    border-radius: 4px;
+    margin: 5px 0;
+    display: inline-block;
+    font-size: 17px;
+    min-height: 100vh;
+    margin-top: 20%;
+    margin-right: 10%;
 }
 .username{
    
@@ -11,17 +19,15 @@
     background-color:'blue';
     font-family:'Times New Roman', Times, serif;
     font-size: large;
-    width: 20%;
+    /* width: 20%; */
     align-items: center;
     margin-left: 40%;
 }
 
 .btnn {
-    margin-top: 2%;
+  margin-top: 2%;
 	box-shadow: 0px 10px 14px -7px #276873;
-	background:linear-gradient(to bottom, #599bb3 5%, #408c99 100%);
-	background-color:#599bb3;
-	border-radius:8px;
+  border-radius:8px;
 	display:inline-block;
 	cursor:pointer;
 	color:#ffffff;
@@ -55,18 +61,37 @@
 }
 
 /* style inputs and link buttons */
-input,
-.btn {
+input
+ {
   width: 100%;
+  flex-direction: column;
   padding: 12px;
-  border: none;
-  border-radius: 4px;
+  border: .1px;
+  border-radius: 1px;
   margin: 5px 0;
   opacity: 0.85;
   display: inline-block;
   font-size: 17px;
   line-height: 20px;
   text-decoration: none; /* remove underline from anchors */
+}
+
+.btn
+ {
+  width: 50%;
+  display: flex;
+  /* flex-direction:column; */
+  padding: 15px;
+  border: none;
+  border-radius: 4px;
+  margin: 5px 0;
+  opacity: 0.85;
+  font-size: 17px;
+  text-align: right;
+  /* line-height: 20px; */
+  text-decoration: none; /* remove underline from anchors */
+  margin-left: 70%;
+  text-align-last: right;
 }
 
 input:hover,
@@ -86,8 +111,19 @@ input:hover,
 }
 
 .iu {
-  background-color: red;
+  /* background-color: red; */
   color: white;
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 4px;
+  margin: 5px 0;
+  opacity: 0.85;
+  /* display: inline-block; */
+  font-size: 17px;
+  line-height: 10px;
+  text-decoration: none;
+  margin-left: 50%;
 }
 
 .google {
@@ -169,4 +205,13 @@ input[type=submit]:hover {
     display: block;
     text-align: center;
   }
+}
+
+.footer {
+  position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 100px;
+    width: 100%;
+    overflow: hidden;
 }

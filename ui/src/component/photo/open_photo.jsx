@@ -79,7 +79,8 @@ export class Openphoto extends React.Component {
         // console.log(await res.json())
         const data = await res.json()
         console.log(data)
-        this.setState({ url : data[0].link})
+        this.setState({ url : data.filter(d => d.title === this.props.selectedphotoname).link})
+        console.log(this.state.url)
       })
       .catch((err) => {
         console.log(err);
@@ -101,7 +102,7 @@ export class Openphoto extends React.Component {
               
             <a href={'data:image/jpeg;base64,' + this.state.previewSrc} download>Download</a>
 
-            <a href={this.state.url}>Google cloud url</a>
+            {/* <a href={this.state.url} onClick={this.getGoogleUploadLink}>Google cloud url</a> */}
             </Modal.Body>
 
             <Modal.Footer>

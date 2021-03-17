@@ -57,30 +57,31 @@ export class Register extends React.Component{
                     <img src={loginImg}></img>
                 </div>
                     <div className="form-group">
-                    <label className="username" htmlFor="username">Username</label>
-                    <input className="username" type="text" name="username" placeholder="username" 
+                    <label htmlFor="username">Username</label>
+                    <input type="text" name="username" placeholder="username" 
 					value = {this.state.username}  onChange={this.handleLogin.bind(this)}></input>
 
-                    <label className="username" htmlFor="password">Password</label>
-                    <input className="username" type="password" name="password" placeholder="password" 
+                    <label  htmlFor="password">Password</label>
+                    <input  type="password" name="password" placeholder="password" 
 					value = {this.state.password}  onChange={this.handleLogin.bind(this)}></input>
                     
-                    <label className="username" htmlFor="username">Firstname</label>
-                    <input className="username" type="text" name="firstname" placeholder="firstname" 
+                    <label htmlFor="username">Firstname</label>
+                    <input  type="text" name="firstname" placeholder="firstname" 
 					value = {this.state.firstname}  onChange={this.handleLogin.bind(this)}></input>
                     
-                    <label className="username" htmlFor="username">Lastname</label>
-                    <input className="username" type="text" name="lastname" placeholder="lastname" 
+                    <label  htmlFor="username">Lastname</label>
+                    <input type="text" name="lastname" placeholder="lastname" 
 					value = {this.state.lastname}  onChange={this.handleLogin.bind(this)}></input>
                     
-                    <label className="username" htmlFor="username">Email</label>
-                    <input className="username" type="email" name="emailID" placeholder="emailID" 
+                    <label  htmlFor="username">Email</label>
+                    <input  type="email" name="emailID" placeholder="emailID" 
 					value = {this.state.emailID}  onChange={this.handleLogin.bind(this)}></input>
+                    <button className="btn btn-success" style={{display:"flex", height:"50%", width:"20%", marginLeft:"40%"}} onClick={this.handleRegister.bind(this)}>Register</button>
+						<div><Link className="link" to="/login">return to login page</Link></div>
                     </div>
 					
 					<div>
-						<button className="btn btn-success" onClick={this.handleRegister.bind(this)}>Register</button>
-						<div><Link className="link" to="/login">return to login page</Link></div>
+						
 					</div>
             </div>
             

@@ -122,14 +122,14 @@ export class UploadPhotosModal extends React.Component {
             </Modal.Body> */}
             <Modal.Body>
               <div>
-                <input
+                {/* <input
                   className="sharedusers"
                   type="text"
                   name="sharedusers"
-                  placeholder="share your uploads"
+                  placeholder="tag your images,"
                   value={this.state.sharedusers}
                   onChange={this.readUserNames}
-                />
+                /> */}
               </div>
             </Modal.Body>
             <Modal.Body>

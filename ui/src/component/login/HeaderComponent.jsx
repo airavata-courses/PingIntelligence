@@ -13,8 +13,12 @@ class HeaderComponent extends Component{
             <header>
                 <nav className = "navbar navbar-expand-md navbar-dark bg-dark">
                     <div>
+                        {window.localStorage.getItem("username") !== null ?
+                        <span style={{display:"flex",float:"right", backgroundColor:"white"}}><img src="https://img.icons8.com/officel/50/000000/change-user-male.png"/>Welcome {window.localStorage.getItem("username")}</span> : null}
+                    
+                    
                         <a href = "http://localhost:3000/dashboard" className = "navbar-brand">
-                        <img className="img-responsive" src={logo} alt="logo" width="120" height="80"/>
+                        <img style = {{height:"120px", width:"200px"}} className="img-responsive" src={logo} alt="logo" width="120" height="120"/>
                         </a>
                     </div>
                     <ul className = "navbar-nav navbar-collapse justify-content-end">
