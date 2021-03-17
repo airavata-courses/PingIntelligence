@@ -1,6 +1,6 @@
 node{
     stage("SCM Checkout"){
-        git branch: 'dockerized_ui', url: 'git@github.com:airavata-courses/PingIntelligence.git'
+        git branch: 'dockerized_ui', credentialsId: 'git-creds', url: 'https://github.com/airavata-courses/PingIntelligence/'
     }
     stage('Build Docker Image'){    		
         sh  '''
