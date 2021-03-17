@@ -25,6 +25,8 @@ class AuthenticationService {
 
     logout() {
         sessionStorage.removeItem(USER_NAME_SESSION_ATTRIBUTE_NAME);
+        window.localStorage.removeItem('username');
+        window.localStorage.removeItem('photosquadtoken');
     }
 
     isUserLoggedIn() {

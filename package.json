@@ -11,6 +11,7 @@
     "blob-util": "^2.0.2",
     "bootstrap": "^4.6.0",
     "file-saver": "^2.0.5",
+    "firebase": "^8.2.10",
     "fs": "0.0.1-security",
     "jszip": "^3.6.0",
     "react": "^17.0.1",
@@ -21,6 +22,7 @@
     "react-dom": "^17.0.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.2",
+    "react-social-login-buttons": "^3.4.0",
     "react-table": "^7.6.3",
     "web-vitals": "^1.1.0"
   },

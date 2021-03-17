@@ -14,8 +14,9 @@ export class Openphoto extends React.Component {
       openModal: false,
       previewSrc: "",
       prev:"",
+      url:"",
     };
-    // this.openPhotos = this.openPhotos.bind(this);
+    this.getGoogleUploadLink = this.getGoogleUploadLink.bind(this);
   }
 
   handleOpen = () => {
@@ -56,7 +57,35 @@ export class Openphoto extends React.Component {
       .catch((err) => {
         console.log(err);
       });
+
+      this.getGoogleUploadLink();
   };
+
+  getGoogleUploadLink = () => {
+    var targetUrl = "http://localhost:3001/googleimagecreds";
+    const requestOption_s = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        title: this.props.selectedphotoname,
+        albumname: this.props.albumname
+      }),
+    };
+    console.log(requestOption_s)
+    fetch(targetUrl, requestOption_s, )
+      .then(async (res) => {
+        // console.log(await res.json())
+        const data = await res.json()
+        console.log(data)
+        this.setState({ url : data.filter(d => d.title === this.props.selectedphotoname).link})
+        console.log(this.state.url)
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
 
   render() {
     return (
@@ -69,9 +98,11 @@ export class Openphoto extends React.Component {
               {/* <a href={this.state.previewSrc}>open</a> */}
               <img src={'data:image/jpeg;base64,' + this.state.previewSrc} />
 
-              <a href={'data:image/jpeg;base64,' + this.state.previewSrc} download>Download</a>
             <Modal.Body>
               
+            <a href={'data:image/jpeg;base64,' + this.state.previewSrc} download>Download</a>
+
+            {/* <a href={this.state.url} onClick={this.getGoogleUploadLink}>Google cloud url</a> */}
             </Modal.Body>
 
             <Modal.Footer>

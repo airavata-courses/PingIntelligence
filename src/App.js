@@ -4,7 +4,7 @@ import {Login,Register, Dashboard, Viewphotos,PhotoSearchModal, Logout} from "./
 import {BrowserRouter as Router, Route, Link, Switch} from 'react-router-dom';
 import ErrorComponent from './component/login/ErrorComponent.jsx'
 import HeaderComponent from './component/login/HeaderComponent.jsx'
-import FooterComponent from './component/login/FooterComponent.jsx'
+// import FooterComponent from './component/login/FooterComponent.jsx'
 import AuthenticatedRoute from './component/login/AuthenticatedRoute.js'
 import './bootstrap.css'
 
@@ -26,7 +26,7 @@ function App() {
 			
 				<Route component = {ErrorComponent} />
 			</Switch>
-			<FooterComponent/>
+			{/* <FooterComponent/> */}
 		</>
       </Router>      
     </div>

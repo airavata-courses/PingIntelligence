@@ -54,7 +54,8 @@ export class UploadPhotosModal extends React.Component {
     let i = 0;
     // for(i; i < len ; i++){
         console.log(this.state.imgCollection[i])
-        formData.append("albumname", this.state.albumname);
+        console.log(this.props.albumname)
+        formData.append("albumname", this.props.albumname);
         formData.append("sharedusers", this.state.sharedusers);
         formData.append("photoname", this.state.photoname);
         // console.log(photo[i])
@@ -74,6 +75,7 @@ export class UploadPhotosModal extends React.Component {
         .catch((err) => {
             console.log(err);
         });
+      
     // }
   };
 
@@ -112,22 +114,22 @@ export class UploadPhotosModal extends React.Component {
               <Modal.Title>Upload Photos</Modal.Title>
             </Modal.Header>
 
-            <Modal.Body>
+            {/* <Modal.Body>
               <Dropdown
                 username={this.props.user}
                 dropdownvalue={this.selectedddvalue}
               />
-            </Modal.Body>
+            </Modal.Body> */}
             <Modal.Body>
               <div>
-                <input
+                {/* <input
                   className="sharedusers"
                   type="text"
                   name="sharedusers"
-                  placeholder="share your uploads"
+                  placeholder="tag your images,"
                   value={this.state.sharedusers}
                   onChange={this.readUserNames}
-                />
+                /> */}
               </div>
             </Modal.Body>
             <Modal.Body>
