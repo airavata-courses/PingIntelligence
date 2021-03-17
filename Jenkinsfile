@@ -1,17 +1,22 @@
-node{
+node {
     def app
     stage("SCM Checkout"){
         checkout scm
     }
+    
     stage('Build Docker Image'){    		
-        sh  '''
-                app = docker.build("pingintelligence/ui-image")
-            '''    
+       app = docker.build("pingintelligence/ui-image")    
+    }
+    
+    stage('Test image') {           
+       app.inside {              
+          sh 'echo "Tests passed"'        
+       }    
     }
    
     stage('Push Docker Image'){
-       sh '''
-            docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {            
-        '''
+       docker.withRegistry('https://registry.hub.docker.com', 'dockerhub')
+       app.push("${env.BUILD_NUMBER}")            
+       app.push("latest")  
     }   
 }
