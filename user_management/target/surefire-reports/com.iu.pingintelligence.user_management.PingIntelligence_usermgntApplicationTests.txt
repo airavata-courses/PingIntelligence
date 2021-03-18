@@ -1,4 +1,0 @@
--------------------------------------------------------------------------------
-Test set: com.iu.pingintelligence.user_management.PingIntelligence_usermgntApplicationTests
--------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 14.189 s - in com.iu.pingintelligence.user_management.PingIntelligence_usermgntApplicationTests
