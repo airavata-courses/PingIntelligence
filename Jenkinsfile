@@ -1,13 +1,5 @@
 node {
-    agent any
     def app
-    
-    environment {
-        registry = "pingintelligence/ui-image"
-        registryCredential = ‘dockerhub’
-    }
-    
-    
     stage("SCM Checkout"){
         checkout scm
     }
@@ -28,8 +20,9 @@ node {
     }
    
     stage('Push Docker Image'){
-       docker.withRegistry(registry, registryCredential)
+        docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
        app.push("${env.BUILD_NUMBER}")            
        app.push("latest")  
+        }
     }   
 }
