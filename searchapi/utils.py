@@ -1,11 +1,11 @@
-from kafka import KafkaConsumer
-import json
-import base64
-from time import sleep
-from json import dumps
-from kafka import KafkaProducer
+# from kafka import KafkaConsumer
+# import json
+# import base64
+# from time import sleep
+# from json import dumps
+# from kafka import KafkaProducer
 
-consumer = KafkaConsumer('metadata', bootstrap_servers=['localhost:9092'])
+# consumer = KafkaConsumer('metadata', bootstrap_servers=['localhost:9092'])
 
 # gauth = GoogleAuth()
 # gauth.LoadCredentialsFile("mycreds.txt")

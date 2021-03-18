@@ -26,7 +26,7 @@ SECRET_KEY = 'n#282h--_06ivdc9cj@y469_b^04)8wcrqr*)*z+22ctj)q!=9'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['metadata-search', 'metadata-search:8000','http://metadata-search:8000','127.0.0.1:8000','127.0.0.1']
 
 
 # Application definition
@@ -78,7 +78,6 @@ REST_FRAMEWORK = {
 
 WSGI_APPLICATION = 'metadataextractorsearch.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
@@ -127,3 +126,5 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+DATA_UPLOAD_MAX_NUMBER_FIELDS = None
