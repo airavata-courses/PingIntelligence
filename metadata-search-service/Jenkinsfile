@@ -10,7 +10,7 @@ node {
     }
     
     stage('Build Docker Image'){    		
-       app = docker.build("pingintelligence/googleupload-image")    
+       app = docker.build("pingintelligence/metadata-search-image")    
     }
     
     stage('Test image') {           

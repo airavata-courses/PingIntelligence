@@ -1,41 +1,28 @@
-node{
+node {
+    def app
     stage("SCM Checkout"){
-        git branch: 'dockerized_gateway', credentialsId: 'git-creds', url: 'git@github.com:airavata-courses/PingIntelligence.git'
+        checkout scm
     }
+    
+    stage('Initialize Docker Setup'){
+        def dockerHome = tool 'docker'
+        env.PATH = "${dockerHome}/bin:${env.PATH}"
+    }
+    
     stage('Build Docker Image'){    		
-        sh  '''
-                sudo apt --assume-yes install docker.io
-                sudo systemctl start docker
-                sudo systemctl enable docker 
-           
-                sudo docker build -f Dockerfile -t pingintelligence/gateway-image .
-            '''    
+       app = docker.build("pingintelligence/gateway-image")    
+    }
+    
+    stage('Test image') {           
+       app.inside {              
+          sh 'echo "Tests passed"'        
+       }    
     }
    
     stage('Push Docker Image'){
-       sh '''
-            sudo docker login --username=$docker_hub_user --password=$docker_hub_pwd &&
-            sudo apt-get upgrade -y &&
-            sudo docker push pingintelligence/gateway-image
-        '''
-}
-
-	/*
-stage('SSH to Kubernetes master') {
-            sh '''
-                chmod 400 brogrammers.pem
-                ssh -o StrictHostKeyChecking=no -i brogrammers.pem ubuntu@149.165.170.140  uptime
-                ssh -i brogrammers.pem ubuntu@149.165.170.140  " rm -rf Brogrammers &&
-                git clone https://github.com/airavata-courses/Brogrammers.git &&
-                cd Brogrammers &&
-                git pull &&
-                git checkout Kubernetes &&
-                cd front_End &&
-                kubectl delete service frontend &&
-                kubectl delete deployment frontend &&
-                sudo kubectl apply -f config.yaml"
-            '''    
+        docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
+        /* app.push("${env.BUILD_NUMBER}")   */         
+        app.push("latest")  
         }
-	*/
-   
+    }   
 }
