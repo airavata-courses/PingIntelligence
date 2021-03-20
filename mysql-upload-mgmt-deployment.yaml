@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert
+    kompose.version: 1.22.0 (955b78124)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: mysql-upload-mgmt
+  name: mysql-upload-mgmt
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: mysql-upload-mgmt
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert
+        kompose.version: 1.22.0 (955b78124)
+      creationTimestamp: null
+      labels:
+        io.kompose.service: mysql-upload-mgmt
+    spec:
+      containers:
+        - args:
+            - --max_allowed_packet=67108864
+          env:
+            - name: MYSQL_DATABASE
+              value: mainphotoupload
+            - name: MYSQL_ROOT_PASSWORD
+              value: root@123
+            - name: MYSQL_TCP_PORT
+              value: "3308"
+          image: mysql:8.0.19
+          name: mysql-upload-mgmt
+          ports:
+            - containerPort: 3308
+          resources: {}
+          volumeMounts:
+            - mountPath: /var/lib/mysql
+              name: mysql-upload-mgmt-claim0
+      restartPolicy: Always
+      volumes:
+        - name: mysql-upload-mgmt-claim0
+          persistentVolumeClaim:
+            claimName: mysql-upload-mgmt-claim0
+status: {}
