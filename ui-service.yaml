@@ -10,10 +10,12 @@ metadata:
   name: ui
 spec:
   ports:
-    - name: "3000"
+    - protocol: TCP
       port: 3000
       targetPort: 3000
+      nodePort: 30030
   selector:
     io.kompose.service: ui
+    type: LoadBalancer
 status:
   loadBalancer: {}
