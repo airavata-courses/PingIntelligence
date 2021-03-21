@@ -16,6 +16,6 @@ spec:
       nodePort: 30030
   selector:
     io.kompose.service: ui
-    type: LoadBalancer
+  type: LoadBalancer
 status:
   loadBalancer: {}
