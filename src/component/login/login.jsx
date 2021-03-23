@@ -34,7 +34,7 @@ export class Login extends React.Component {
   }
 
   handleSubmit() {
-    var targetUrl = "http://localhost:3001/login";
+    var targetUrl = "http://gateway:3001/login";
     const requestOptions = {
       method: "POST",
       headers: {
