@@ -26,7 +26,7 @@ export class Register extends React.Component{
     }
     
     handleRegister(ev){
-        var targetUrl = "http://localhost:3001/register";
+        var targetUrl = "http://149.165.170.179:gateway/register";
         const requestOptions = {
         method: "POST",
         headers: {'Content-Type': 'application/json', Accept: 'application/json'},
