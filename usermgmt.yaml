@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: user-mgmt
+  name: user-mgmt
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: user-mgmt
+  template:
+    metadata:
+      labels:
+        app: user-mgmt
+    spec:
+      containers:
+      - image: pingintelligence/user-mgmt-image:latest
+        name: user-mgmt
+        ports:
+        - containerPort: 8091
+        env:
+          - name : MYSQL_URL
+            value : mysql-user-mgmt:3306
+          - name : MYSQL_USERNAME
+            value : root
+          - name : MYSQL_ROOT_PASSWORD
+            value : root@123
+          - name : USER_MANAGEMENT_DB
+            value : UserManagement
+        command: ["/bin/sh", "-ec", "while :;do echo '.'; sleep 5; done"]
+      restartPolicy: Always
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: user-mgmt
+  name: user-mgmt
+spec:
+  type: LoadBalancer
+  ports:
+  - name: "user-mgmt"
+    port: 8091
+    targetPort: 8091
+    nodePort: 30091
+  selector:
+    app: user-mgmt
