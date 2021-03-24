@@ -45,6 +45,7 @@ app.post("/login", (req, res) => {
  * register by user
  */
 app.post("/register", (req, res) => {
+  console.log("hello")
   console.log(req.body);
   axios
     .post("http://user-mgmt:8091/user/signup", {
