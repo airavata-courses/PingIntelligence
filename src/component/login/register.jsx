@@ -40,7 +40,7 @@ export class Register extends React.Component{
             emailID: this.state.emailID
         }),
         };
-        fetch(targetURl, requestOptions)
+        fetch(targetUrl, requestOptions)
         .then(async (res) => {
             this.setState({registered : true})
             const data = await res.json()
