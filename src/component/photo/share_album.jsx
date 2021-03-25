@@ -26,8 +26,9 @@ export class ShareAlbumModal extends React.Component {
 
   handleSubmit = () => {
     console.log(this.state.albumname)
-    var targetUrl =
-      "http://localhost:3001/sharealbum"
+    //var targetUrl = "http://localhost:3001/sharealbum"
+    var targetUrl = "http://149.165.156.145:30001/sharealbum"
+    
     const requestOption_s = {
       method: "POST",
       headers: {
