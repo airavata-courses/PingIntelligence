@@ -37,7 +37,9 @@ export class Openphoto extends React.Component {
 
   componentDidMount = () => {
     this.setState({ openModal: this.props.show });
-    var targetUrl = "http://localhost:3001/downloadimage";
+    //var targetUrl = "http://localhost:3001/downloadimage";
+    var targetUrl = "http://149.165.156.145:30001/downloadimage";
+    
     const requestOption_s = {
       method: "POST",
       headers: {
@@ -62,7 +64,9 @@ export class Openphoto extends React.Component {
   };
 
   getGoogleUploadLink = () => {
-    var targetUrl = "http://localhost:3001/googleimagecreds";
+    //var targetUrl = "http://localhost:3001/googleimagecreds";
+    var targetUrl = "http://149.165.156.145:30001/googleimagecreds";
+    
     const requestOption_s = {
       method: "POST",
       headers: {
