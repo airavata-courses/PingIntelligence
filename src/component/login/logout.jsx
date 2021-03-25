@@ -16,7 +16,9 @@ export class Logout extends React.Component{
 
     handleSubmit() {
         console.log(this.state.username)
-        var targetUrl = "http://localhost:3001/logout";
+        //var targetUrl = "http://localhost:3001/logout";
+        var targetUrl = "http://149.165.156.145:30001/logout";
+        
         const requestOptions = {
         method: "POST",
         headers: {'Content-Type': 'application/json', Accept: 'application/json'},
