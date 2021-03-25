@@ -30,8 +30,9 @@ export class PhotoSearchModal extends React.Component {
 
   handleSubmit = () => {
     // console.log(this.state.albumname)
-    var targetUrl =
-      "http://localhost:3001/searchphotometadata"
+    //var targetUrl = "http://localhost:3001/searchphotometadata"
+    var targetUrl = "http://149.165.156.145:30001/searchphotometadata"
+    
     const requestOption_s = {
       method: "POST",
       headers: {
