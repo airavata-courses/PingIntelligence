@@ -24,7 +24,9 @@ class CreateAlbum extends React.Component {
 }
 
   fetchOptions() {
-    var targetUrl = "http://localhost:3001/useralbums";
+    //var targetUrl = "http://localhost:3001/useralbums";
+    var targetUrl = "http://149.165.156.145:30001/useralbums";
+    
     const requestOption_s = {
       method: "POST",
       headers: {
