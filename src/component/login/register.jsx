@@ -27,7 +27,7 @@ export class Register extends React.Component{
     
     handleRegister(ev){
  //       var targetUrl = "http://localhost:3001/register";
-	var targetUrl = "http://gateway:3001/register";
+	var targetUrl = "http://gateway:30001/register";
 // 	var targetUrl = "http://10.109.226.137:3001/register";
         const requestOptions = {
         method: "POST",
