@@ -19,15 +19,6 @@ spec:
         name: user-mgmt
         ports:
         - containerPort: 8091
-        env:
-          - name : MYSQL_URL
-            value : mysql-user-mgmt:3306
-          - name : MYSQL_USERNAME
-            value : root
-          - name : MYSQL_ROOT_PASSWORD
-            value : root@123
-          - name : USER_MANAGEMENT_DB
-            value : UserManagement
         command: ["/bin/sh", "-ec", "while :;do echo '.'; sleep 5; done"]
       restartPolicy: Always
 
