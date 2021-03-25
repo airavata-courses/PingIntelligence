@@ -45,7 +45,9 @@ export class Viewphotos extends React.Component {
   //           }
   //       }
   for(i = 0; i < uniqueList.length ; i++){
-    var targetUrl = "http://localhost:3001/downloadimage";
+    //var targetUrl = "http://localhost:3001/downloadimage";
+    var targetUrl = "http://149.165.156.145:30001/downloadimage";
+    
     const requestOption_s = {
     method: "POST",
     headers: {
@@ -73,8 +75,9 @@ export class Viewphotos extends React.Component {
   }
 
   componentDidMount = () => {
-    var targetUrl = "http://localhost:3001/findonealbum";
-
+    //var targetUrl = "http://localhost:3001/findonealbum";
+    var targetUrl = "http://149.165.156.145:30001/findonealbum";
+    
     const requestOptions = {
       method: "POST",
       headers: {
@@ -136,7 +139,9 @@ export class Viewphotos extends React.Component {
   }
 
   deletePhoto = () => {
-    var targetUrl = "http://localhost:3001/deletephoto";
+    //var targetUrl = "http://localhost:3001/deletephoto";
+    var targetUrl = "http://149.165.156.145:30001/deletephoto";
+    
     const requestOption_s = {
       method: "POST",
       headers: {
