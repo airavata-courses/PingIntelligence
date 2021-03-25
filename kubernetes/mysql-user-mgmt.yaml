@@ -35,14 +35,16 @@ metadata:
   labels:                         # Labels that will be applied to the resource
     app: mysql-user-mgmt
 spec:
+  type: LoadBalancer
   ports:
     - name: "mysql-user-mgmt"
       port: 3306
       targetPort: 3306
+      nodePort: 30006
   selector:                       # Selects any Pod with labels `app=polling-app,tier=mysql`
     app: mysql-user-mgmt
     tier: mysql
-    clusterIP: mysql-user-mgmt
+    #    clusterIP: mysql-user-mgmt
 ---
 apiVersion: apps/v1
 kind: Deployment                    # Type of the kubernetes resource

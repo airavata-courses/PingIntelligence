@@ -33,7 +33,7 @@ spec:
         - name: SPRING_DATASOURCE_PASSWORD
           value: root@123
         - name: SPRING_DATASOURCE_URL
-          value: jdbc:mysql://mysql-user-mgmt:3306/UserManagement?autoReconnect=true&user=root&password=root@123&useSSL=false
+          value: jdbc:mysql://mysql-user-mgmt.default:3306/UserManagement?useSSL=false&serverTimezone=UTC&useLegacyDatetimeCode=false&autoReconnect=true&allowPublicKeyRetrieval=true
 ---
 apiVersion: v1                # API version
 kind: Service                 # Type of the kubernetes resource
