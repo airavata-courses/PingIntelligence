@@ -34,7 +34,9 @@ export class Login extends React.Component {
   }
 
   handleSubmit() {
-    var targetUrl = "http://gateway:3001/login";
+    //var targetUrl = "http://gateway:3001/login";
+    var targetUrl = "http://149.165.156.145:30001/login";
+    
     const requestOptions = {
       method: "POST",
       headers: {
@@ -108,7 +110,9 @@ export class Login extends React.Component {
           var passwordVar = "$deFAult#paSSwrd*%";
 
           console.log("Trying registering user using Social Media details...");
-          var targetUrl = "http://localhost:3001/register";
+          //var targetUrl = "http://localhost:3001/register";
+          var targetUrl = "http://149.165.156.145:30001/register";
+          
           const requestOptions = {
             method: "POST",
             headers: {
