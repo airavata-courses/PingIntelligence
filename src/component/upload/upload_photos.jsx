@@ -61,7 +61,9 @@ export class UploadPhotosModal extends React.Component {
         // console.log(photo[i])
         // formData.append("files", this.state.imgCollection[i]);
     
-        var targetUrl = "http://localhost:3001/uploadalbumphotos";
+        //var targetUrl = "http://localhost:3001/uploadalbumphotos";
+        var targetUrl = "http://149.165.156.145:30001/uploadalbumphotos";
+        
         const requestOption_s = {
         headers: {
             'content-type': 'multipart/form-data'
