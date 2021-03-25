@@ -35,8 +35,9 @@ export class CreateAlbumModal extends React.Component {
 
   handleSubmit = () => {
     console.log(this.state.albumname)
-    var targetUrl =
-      "http://localhost:3001/createalbum"
+    //var targetUrl = "http://localhost:3001/createalbum"
+    var targetUrl = "http://149.165.156.145:30001/createalbum"
+    
     const requestOption_s = {
       method: "POST",
       headers: {
