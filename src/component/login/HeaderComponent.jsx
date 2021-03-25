@@ -17,7 +17,7 @@ class HeaderComponent extends Component{
                         <span style={{display:"flex",float:"right", backgroundColor:"white"}}><img src="https://img.icons8.com/officel/50/000000/change-user-male.png"/>Welcome {window.localStorage.getItem("username")}</span> : null}
                     
                     
-                        <a href = "http://localhost:3000/dashboard" className = "navbar-brand">
+                        <a href = "http://149.165.156.145:30030/dashboard" className = "navbar-brand">
                         <img style = {{height:"120px", width:"200px"}} className="img-responsive" src={logo} alt="logo" width="120" height="120"/>
                         </a>
                     </div>
