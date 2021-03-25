@@ -34,7 +34,9 @@ export class Dashboard extends React.Component {
   }
 
   findAlbums = () => {
-    var targetUrl = "http://localhost:3001/useralbums";
+    // var targetUrl = "http://localhost:3001/useralbums";
+    var targetUrl = "http://http://149.165.156.145:30001/useralbums";
+    
     const requestOption_s = {
       method: "POST",
       headers: {
@@ -70,7 +72,9 @@ export class Dashboard extends React.Component {
     const token = window.localStorage.getItem("photosquadtoken");
     // console.log(token);
 
-    var targetUrl = "http://localhost:3001/verifyusertoken";
+    // var targetUrl = "http://localhost:3001/verifyusertoken";
+    var targetUrl = "http://149.165.156.145:30001/verifyusertoken";
+    
     const requestOptions = {
       method: "POST",
       headers: {
@@ -129,7 +133,9 @@ export class Dashboard extends React.Component {
   };
 
   deleteAlbum = () => {
-    var targetUrl = "http://localhost:3001/deletealbum";
+    // var targetUrl = "http://localhost:3001/deletealbum";
+    var targetUrl = "http://149.165.156.145:30001/deletealbum";
+    
     const requestOption_s = {
       method: "POST",
       headers: {
