@@ -6,7 +6,7 @@ import json
 from kafka import KafkaProducer
 import requests
 
-consumer1 = KafkaConsumer('test2', bootstrap_servers=['kafka:9092'])
+consumer1 = KafkaConsumer('test2', bootstrap_servers=['kafka-mgmt:9092'])
 
 
 def deletefiles(albumname):
