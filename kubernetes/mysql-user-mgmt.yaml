@@ -73,6 +73,7 @@ spec:
           value: root@123
         - name: MYSQL_DATABASE
           value: UserManagement
+          value: mainphotoupload
         ports:
         - containerPort: 3306        # The port that the container exposes       
           name: mysql-user-mgmt

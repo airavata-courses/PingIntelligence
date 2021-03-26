@@ -1,0 +1,60 @@
+apiVersion: v1                    # API version
+kind: Service                     # Type of kubernetes resource
+metadata:
+  name: kafka-mgmt         # Name of the resource
+  labels:                         # Labels that will be applied to the resource
+    app: kafka-mgmt
+spec:
+  type: LoadBalancer
+  ports:
+    - name: "kafka-mgmt"
+      port: 9092
+      targetPort: 9092
+      nodePort: 30093
+  selector:                       # Selects any Pod with labels `app=polling-app,tier=mysql`
+    app: kafka-mgmt
+    tier: kafka
+    #    clusterIP: kafka-user-mgmt
+---
+apiVersion: apps/v1
+kind: Deployment                    # Type of the kubernetes resource
+metadata:
+  name: kafka-mgmt           # Name of the deployment
+  labels:                           # Labels applied to this deployment
+    app: kafka-mgmt
+spec:
+  selector:
+    matchLabels:                    # This deployment applies to the Pods matching the specified labels
+      app: kafka-mgmt
+      tier: kafka
+  strategy:
+    type: Recreate
+  template:                         # Template for the Pods in this deployment
+    metadata:
+      labels:                       # Labels to be applied to the Pods in this deployment
+        app: kafka-mgmt
+        tier: kafka
+    spec:                           # The spec for the containers that will be run inside the Pods in this deployment
+      containers:
+      - image: wurstmeister/kafka:2.11-2.0.0            # The container image
+        name: kafka-mgmt
+        env:
+        - name : BROKER_IP
+          valueFrom:
+            fieldRef:
+              fieldPath: status.podIP
+        - name: KAFKA_BROKER_ID
+          value: "1" 
+        - name: KAFKA_ADVERTISED_LISTENERS
+          value: "PLAINTEXT://$(BROKER_IP):9092"  # PLAINTEXT://:9092
+        - name: KAFKA_CREATE_TOPICS
+          value: "test1:1:1,test2:1:1"
+        - name: KAFKA_LISTENERS
+          value: "PLAINTEXT://0.0.0.0:9092"  # PLAINTEXT://:9092
+        - name: KAFKA_MESSAGE_MAX_BYTES
+          value: "30000000"
+        - name: KAFKA_ZOOKEEPER_CONNECT
+          value: zookeeper:2181  # zookeeper.default:2181
+        ports:
+        - containerPort: 9092        # The port that the container exposes
+          name: kafka-mgmt
