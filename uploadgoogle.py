@@ -6,7 +6,7 @@ import json
 from kafka import KafkaProducer
 import requests
 
-consumer = KafkaConsumer('test1', bootstrap_servers=['kafka:9092'])
+consumer = KafkaConsumer('test1', bootstrap_servers=['kafka-mgmt:9092'])
 
 def uploadfiles(albumname,photos):
     for i in photos:
