@@ -23,5 +23,9 @@ node {
         docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
         app.push("latest")  
         }
-    }   
+    }
+    
+    stage('Cleaning up Disk Space') {
+        sh "docker image prune -f"
+    } 
 }
