@@ -9,7 +9,7 @@ metadata:
     io.kompose.service: django-google
   name: django-google
 spec:
-  replicas: 1
+  replicas: 3
   selector:
     matchLabels:
       io.kompose.service: django-google
