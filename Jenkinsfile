@@ -27,5 +27,21 @@ node {
     
     stage('Cleaning up Disk Space') {
         sh "docker image prune -f"
-    } 
+    }
+    
+    stage('Deploying new service into Kubernetes') {
+        sshagent(credentials: ['ssh-key']) {
+            
+            sh '''
+                ssh -o StrictHostKeyChecking=no ubuntu@149.165.156.145  "sudo su 
+                sudo rm -rf PingIntelligence &&
+                git clone https://github.com/airavata-courses/PingIntelligence.git &&
+                cd PingIntelligence &&
+                git checkout kubernetes_files
+                sudo su
+                sudo kubectl delete deployment,service metadata-search &&
+                sudo kubectl apply -f metadata-search.yaml"
+               '''
+        }
+    }
 }
