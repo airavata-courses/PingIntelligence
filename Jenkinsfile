@@ -26,10 +26,6 @@ node {
     }
     
     stage('Cleaning up Disk Space') {
-        sh "docker rmi pingintelligence/consumer-queue-image:latest"
-        sh "docker rmi registry.hub.docker.com/pingintelligence/consumer-queue-image:latest"
-        sh "docker rmi pingintelligence/consumer-queue-image:<none>"
-        sh "docker rmi registry.hub.docker.com/pingintelligence/consumer-queue-image:<none>"
-        sh "docker rmi <none>:<none>"
+        sh "docker image prune -f"
     } 
 }
