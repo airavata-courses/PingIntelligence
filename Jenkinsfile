@@ -24,4 +24,8 @@ node {
         app.push("latest")  
         }
     }   
+    
+    stage('Cleaning up Disk Space') {
+        sh "docker image prune -f"
+    } 
 }
