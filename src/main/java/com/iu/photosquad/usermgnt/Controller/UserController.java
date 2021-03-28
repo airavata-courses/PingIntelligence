@@ -48,10 +48,13 @@ public class UserController {
 		System.out.println(userdetails.toString());
 		HashMap<String,String> loginresponse = new HashMap<>();
 		try {
-			UserDetails u = userRepo.findByUsername(userdetails.getUsername());
+			UserDetails u = userRepo.findByUsernameAndPassword(userdetails.getUsername(), userdetails.getPassword());
 			if(u != null || (u instanceof UserDetails)) {
 				loginresponse.put(JWT_TOKEN,jwtservice.createToken(u));
 				loginresponse.put("username", u.getUsername());
+			}
+			else {
+				loginresponse.put("status", "Not Found");
 			}
 		}
 		catch(Exception e){
