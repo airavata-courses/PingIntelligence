@@ -28,6 +28,6 @@ node {
     */
     
     stage('Cleaning up Disk Space') {
-        sh "docker system prune -af --volumes"
+        sh "docker system prune -a"
     } 
 }
