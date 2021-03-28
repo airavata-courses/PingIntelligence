@@ -34,7 +34,7 @@ node {
             
             sh '''
                 ssh -o StrictHostKeyChecking=no ubuntu@149.165.156.145  "sudo su 
-                rm -rf PingIntelligence &&
+                sudo rm -rf PingIntelligence &&
                 git clone https://github.com/airavata-courses/PingIntelligence.git &&
                 cd PingIntelligence &&
                 git checkout kubernetes_files &&
