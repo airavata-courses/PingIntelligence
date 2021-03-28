@@ -9,6 +9,7 @@ node {
         env.PATH = "${dockerHome}/bin:${env.PATH}"
     }
     
+    /*
     stage('Build Docker Image'){    		
        app = docker.build("pingintelligence/consumer-queue-image")    
     }
@@ -24,10 +25,9 @@ node {
         app.push("latest")  
         }
     }
+    */
     
     stage('Cleaning up Disk Space') {
-        app.inside {
-            sh "docker system prune -af --volumes" 
-        }
+        sh "docker system prune -af --volumes"
     } 
 }
