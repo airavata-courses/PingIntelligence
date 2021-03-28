@@ -26,7 +26,7 @@ node {
     }
     
     stage('Cleaning up Disk Space') {
-        steps{
+        app.inside {
             sh "docker system prune -af --volumes" 
         }
     } 
