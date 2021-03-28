@@ -65,6 +65,7 @@ spec:
         app: mysql-user-mgmt
         tier: mysql
     spec:                           # The spec for the containers that will be run inside the Pods in this deployment
+      replicas: 2
       containers:
       - image: mysql:8.0.19            # The container image
         name: mysql-user-mgmt
