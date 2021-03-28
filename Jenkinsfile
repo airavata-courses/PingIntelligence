@@ -9,7 +9,6 @@ node {
         env.PATH = "${dockerHome}/bin:${env.PATH}"
     }
     
-    /*
     stage('Build Docker Image'){    		
        app = docker.build("pingintelligence/consumer-queue-image")    
     }
@@ -25,9 +24,12 @@ node {
         app.push("latest")  
         }
     }
-    */
     
     stage('Cleaning up Disk Space') {
-        sh "docker system prune -a"
+        sh "docker rmi pingintelligence/consumer-queue-image:latest"
+        sh "docker rmi registry.hub.docker.com/pingintelligence/consumer-queue-image:latest"
+        sh "docker rmi pingintelligence/consumer-queue-image:<none>"
+        sh "docker rmi registry.hub.docker.com/pingintelligence/consumer-queue-image:<none>"
+        sh "docker rmi <none>:<none>"
     } 
 }
