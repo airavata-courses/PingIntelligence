@@ -4,7 +4,6 @@ node {
         checkout scm
     }
     
-    /*
     stage('Initialize Docker Setup'){
         def dockerHome = tool 'docker'
         env.PATH = "${dockerHome}/bin:${env.PATH}"
@@ -29,7 +28,6 @@ node {
     stage('Cleaning up Disk Space') {
         sh "docker image prune -f"
     } 
-    */
     
     stage('Deploying new service into Kubernetes') {
         sshagent(credentials: ['ssh-key']) {
