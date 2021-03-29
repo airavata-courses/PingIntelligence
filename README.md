@@ -1,6 +1,6 @@
 <p align="center">
   <img width="280" height="200"
-  src="https://github.com/airavata-courses/PingIntelligence/blob/main/Design_Documents/Logo/logo.JPG">
+  src="https://github.com/airavata-courses/PingIntelligence/blob/main/Design%20Documents/logo.JPG">
 </p>
 
 ## Dependencies
