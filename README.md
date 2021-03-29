@@ -3,40 +3,13 @@
   src="https://github.com/airavata-courses/PingIntelligence/blob/main/Design%20Documents/logo.JPG">
 </p>
 
-## Dependencies
+# Wiki
+Refer Wiki Page for detailed information related to all our Milestones and work
+https://github.com/airavata-courses/PingIntelligence/wiki
 
-1. <a href="https://docs.docker.com/get-docker/">Docker</a>
+#Developers
 
-## Steps to run
-
-> cd gateway/apigateway/
-
-> docker build -f Dockerfile -t pingintelligence/gateway-image .
-
-> cd ../..
-
-> cd ui/ui/
-
-> docker build -f Dockerfile -t pingintelligence/ui-image .
-
-> cd ../..
-
-> cd user_management/user_management/
-
-> docker build -f Dockerfile -t pingintelligence/user-mgmt-image .
-
-> cd ../..
-
-> cd mainuploadmgmt/
-
-> docker build -f Dockerfile -t pingintelligence/upload-mgmt-image .
-
-> cd ../
-
-> cd uploadgoogledrive/
-
-> docker build -f Dockerfile -t pingintelligence/upload-google-image .
-
-> cd ../
-
-> docker-compose up -d
+1. <a href="https://www.linkedin.com/in/danagar0312">Deepika Awasthi</a>
+2. <a href="https://www.linkedin.com/in/meet-valia">Meet Valia</a>
+3. <a href="https://www.linkedin.com/in/sudippadhye/">Sudip Padhye</a>
+4. <a href="https://www.linkedin.com/in/srikanth-velpuri-706314100">Srikanth Velpuri</a>
