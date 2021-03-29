@@ -5,9 +5,10 @@
 
 # Wiki
 Refer Wiki Page for detailed information related to all our Milestones and work
+
 https://github.com/airavata-courses/PingIntelligence/wiki
 
-#Developers
+# Developers
 
 1. <a href="https://www.linkedin.com/in/danagar0312">Deepika Awasthi</a>
 2. <a href="https://www.linkedin.com/in/meet-valia">Meet Valia</a>
