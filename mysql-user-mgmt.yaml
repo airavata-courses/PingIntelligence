@@ -53,7 +53,7 @@ metadata:
   labels:                           # Labels applied to this deployment 
     app: mysql-user-mgmt
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:                    # This deployment applies to the Pods matching the specified labels
       app: mysql-user-mgmt
