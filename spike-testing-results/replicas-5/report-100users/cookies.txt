@@ -1,0 +1,3 @@
+# JMeter generated Header file
+token_value	${token_value}
+username_value	${username_value}
