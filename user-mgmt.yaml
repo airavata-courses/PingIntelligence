@@ -5,7 +5,7 @@ metadata:
   labels:                     # Labels that will be applied to this resource
     app: user-mgmt
 spec:
-  replicas: 3                 # No. of replicas/pods to run in this deployment
+  replicas: 4                 # No. of replicas/pods to run in this deployment
   selector:
     matchLabels:              # The deployment applies to any pods mayching the specified labels
       app: user-mgmt
