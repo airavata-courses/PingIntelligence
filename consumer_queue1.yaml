@@ -9,7 +9,7 @@ metadata:
     io.kompose.service: consumer-queue
   name: consumer-queue
 spec:
-  replicas: 1
+  replicas: 4
   selector:
     matchLabels:
       io.kompose.service: consumer-queue
