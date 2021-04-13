@@ -3,7 +3,7 @@ apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   name: kubemonkey-chaos-engineering
-  namespace: default
+  namespace: kube-system
   labels:
     kube-monkey/enabled: enabled
     kube-monkey/identifier: monkey-victim
