@@ -1,0 +1,3 @@
+timeStamp,elapsed,label,responseCode,responseMessage,threadName,dataType,success,failureMessage,bytes,sentBytes,grpThreads,allThreads,URL,Latency,IdleTime,Connect
+1618419454382,64,HTTP Request,200,OK,Thread Group 1-1,text,true,,2635,188,1,1,http://149.165.156.145:30030/,64,0,42
+1618419460513,22174,Launch,200,OK,Concurrent Login-ThreadStarter 2-1,text,true,,1457,404,1,1,http://149.165.156.145:30030/,22172,0,4
