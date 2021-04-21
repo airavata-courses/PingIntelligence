@@ -18,7 +18,7 @@ cd jetstream_kubespray/inventory/kubejetstream &&
 bash terraform_init.sh &&
 bash terraform_apply.sh &&
 #export IP=149.165.156.145 &&
-export IP=129.114.16.139 &&
+export IP=129.114.16.125 &&
 cd ../../ &&
 sudo apt update &&
 sudo apt install python3-pip &&
