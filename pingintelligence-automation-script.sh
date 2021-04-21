@@ -8,7 +8,6 @@ unzip terraform_0.14.4_linux_386.zip &&
 sudo chmod +x terraform &&
 sudo mv terraform /usr/bin &&
 rm -rf terraform_0.14.4_linux_386.zip &&
-terraform --version &&
 export CLUSTER=kubejetstream &&
 mv ./cluster.tfvars jetstream_kubespray/inventory/kubejetstream/ &&
 mv ./k8s-cluster.yml jetstream_kubespray/inventory/kubejetstream/group_vars/k8s-cluster &&
