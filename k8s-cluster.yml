@@ -253,7 +253,7 @@ kubeconfig_localhost: true
 ## Supplementary addresses that can be added in kubernetes ssl keys.
 ## That can be useful for example to setup a keepalived virtual IP
 # supplementary_addresses_in_ssl_keys: [149.165.156.145]  #For IU Jetstream
-supplementary_addresses_in_ssl_keys: [129.114.16.139]  #For TACC Jetstream
+supplementary_addresses_in_ssl_keys: [129.114.16.125]  #For TACC Jetstream
 
 ## Running on top of openstack vms with cinder enabled may lead to unschedulable pods due to NoVolumeZoneConflict restriction in kube-scheduler.
 ## See https://github.com/kubernetes-sigs/kubespray/issues/2141
