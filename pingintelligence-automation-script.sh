@@ -4,8 +4,8 @@ pip3 install python-openstackclient &&
 #curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add - &&
 #sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main" &&
 #sudo apt-get update && sudo apt-get install terraform &&
-wget https://releases.hashicorp.com/terraform/0.14.4/terraform_0.14.4_linux_386.zip &&
-unzip terraform_0.14.4_linux_386.zip &&
+wget https://releases.hashicorp.com/terraform/0.14.4/terraform_0.14.4_linux_amd64.zip &&
+unzip terraform_0.14.4_linux_amd64.zip &&
 sudo chmod +x terraform &&
 sudo mv terraform /usr/bin &&
 rm -rf terraform_0.14.4_linux_386.zip &&
