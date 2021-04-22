@@ -1,6 +1,7 @@
 cd .. &&
 sudo apt-get update &&
-pip3 install python-openstackclient &&
+# pip3 install python-openstackclient &&
+pip3 install python-openstackclient==3.18.1 &&
 #curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add - &&
 #sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main" &&
 #sudo apt-get update && sudo apt-get install terraform &&
