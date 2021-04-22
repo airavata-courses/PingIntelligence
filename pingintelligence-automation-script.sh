@@ -1,10 +1,10 @@
 cd .. &&
 sudo apt-get update &&
-python -m pip install -U pip &&
-pip install setuptools-rust && 
-pip3 install setuptools-rust &&
-pip install --upgrade pip &&
-pip3 install --upgrade pip &&
+# python -m pip install -U pip &&
+# pip install setuptools-rust && 
+# pip3 install setuptools-rust &&
+# pip install --upgrade pip &&
+# pip3 install --upgrade pip &&
 pip3 install python-openstackclient &&
 # pip3 install python-openstackclient==3.18.1 &&
 #curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add - &&
@@ -16,7 +16,7 @@ unzip terraform_0.14.4_linux_amd64.zip &&
 sudo chmod +x terraform &&
 sudo cp terraform /usr/local/bin/ &&
 sudo mv terraform /usr/bin/ &&
-rm -rf terraform_0.14.4_linux_386.zip &&
+rm -rf terraform_0.14.4_linux_amd64.zip &&
 cd PingIntelligence/ &&
 export CLUSTER=kubejetstream &&
 mv ./cluster.tfvars jetstream_kubespray/inventory/kubejetstream/ &&
