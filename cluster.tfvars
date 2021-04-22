@@ -1,9 +1,6 @@
 # your Kubernetes cluster name here
 cluster_name = "pingintelligence"
 
-# list of availability zones available in your OpenStack cluster
-#az_list = ["nova"]
-
 # SSH key to use for access to nodes
 public_key_path = "~/.ssh/id_rsa.pub"
 
@@ -73,8 +70,10 @@ floatingip_pool = "public"
 
 # list of availability zones available in your OpenStack cluster
 # IU
-az_list = ["zone-r6"]
-az_list_node = ["zone-r6"]
+# az_list = ["zone-r6"]
+# az_list_node = ["zone-r6"]
+# TACC
+az_list = ["nova"]
 
 bastion_allowed_remote_ips = ["0.0.0.0/0"]
 
