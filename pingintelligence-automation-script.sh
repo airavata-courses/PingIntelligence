@@ -1,6 +1,10 @@
 cd .. &&
 sudo apt-get update &&
 python -m pip install -U pip &&
+pip install setuptools-rust && 
+pip3 install setuptools-rust &&
+pip install --upgrade pip &&
+pip3 install --upgrade pip &&
 pip3 install python-openstackclient &&
 # pip3 install python-openstackclient==3.18.1 &&
 #curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add - &&
