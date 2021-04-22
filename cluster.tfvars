@@ -63,9 +63,9 @@ number_of_k8s_nodes_no_floating_ip = 0
 network_name = "pingintelligence-network"
 
 # IU
-external_net = "4367cd20-722f-4dc2-97e8-90d98c25f12e"
+# external_net = "4367cd20-722f-4dc2-97e8-90d98c25f12e"
 # TACC
-# external_net = "865ff018-8894-40c2-99b7-d9f8701ddb0b"
+external_net = "865ff018-8894-40c2-99b7-d9f8701ddb0b"
 
 # subnet_cidr = "<cidr>"
 
