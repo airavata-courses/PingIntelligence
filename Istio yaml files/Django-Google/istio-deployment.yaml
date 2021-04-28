@@ -1,0 +1,65 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert
+    kompose.version: 1.22.0 (955b78124)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: django-google
+  name: django-google
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: django-google
+  strategy: {}
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert
+        kompose.version: 1.22.0 (955b78124)
+      creationTimestamp: null
+      labels:
+        io.kompose.service: django-google
+    spec:
+      containers:
+        - image: pingintelligence/googleupload-image:latest
+          name: django-google
+          ports:
+            - containerPort: 9000
+          resources: {}
+      restartPolicy: Always
+status: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    kompose.cmd: kompose convert
+    kompose.version: 1.22.0 (955b78124)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: django-google
+  name: django-google
+spec:
+  ports:
+    - name: "9000"
+      port: 9000
+      targetPort: 9000
+  selector:
+    io.kompose.service: django-google
+http:
+  - match:
+    - {}
+    route:
+    - destination:
+        subset: v1
+        port:
+          number: 80
+      weight: 100
+    - destination:
+        subset: v2
+        port:
+          number: 80
+      weight: 0
