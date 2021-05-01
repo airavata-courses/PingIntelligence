@@ -7,9 +7,7 @@ while true;do
         if [[ $blue == "IU" ]]; then
                 echo "IU -> TACC deployment"
                 chmod 400 ./id_rsa_iu
-                echo '1'
                 ssh -i ./id_rsa_iu ubuntu@149.165.156.145 "sudo su --command 'bash iu_to_haproxy.sh;
-                echo '2'
                 if [ -e ./istio_status.txt ] && [[ $( cat istio_status.txt |  wc -w ) > 0 ]]; then
                         cd ../;
                         bash db_push_iu.sh;
@@ -24,7 +22,6 @@ while true;do
                         bash db_push_tacc.sh;
                         fi'"
         fi
-        echo 'Outside main if';
 
         #Flipping IU & TACC (Blue - Green)
         if [ -e ./istio_status.txt ] && [[ $( cat istio_status.txt |  wc -w ) > 0 ]]; then
