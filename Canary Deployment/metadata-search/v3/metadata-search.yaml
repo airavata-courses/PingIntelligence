@@ -1,0 +1,65 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert
+    kompose.version: 1.22.0 (955b78124)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: metadata-search
+  name: metadata-search
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      io.kompose.service: metadata-search
+  strategy: {}
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert
+        kompose.version: 1.22.0 (955b78124)
+      creationTimestamp: null
+      labels:
+        io.kompose.service: metadata-search
+    spec:
+      containers:
+        - image: pingintelligence/metadata-search-image:latest
+          name: metadata-search
+          ports:
+            - containerPort: 8000
+          resources: {}
+      restartPolicy: Always
+status: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    kompose.cmd: kompose convert
+    kompose.version: 1.22.0 (955b78124)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: metadata-search
+  name: metadata-search
+spec:
+  ports:
+    - name: "8000"
+      port: 8000
+      targetPort: 8000
+  selector:
+    io.kompose.service: metadata-search
+http:
+  - match:
+    - {}
+    route:
+    - destination:
+        subset: v1
+        port:
+          number: 8000
+      weight: 0
+    - destination:
+        subset: v2
+        port:
+          number: 8000
+      weight: 100
