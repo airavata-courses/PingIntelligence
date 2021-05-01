@@ -1,0 +1,67 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    kompose.cmd: kompose convert
+    kompose.version: 1.22.0 (955b78124)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: gateway
+  name: gateway
+spec:
+  type: LoadBalancer
+  ports:
+    - name: "3001"
+      port: 3001
+      targetPort: 3001
+      nodePort: 30001
+  selector:
+    io.kompose.service: gateway
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert
+    kompose.version: 1.22.0 (955b78124)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: gateway
+  name: gateway
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      io.kompose.service: gateway
+  strategy: {}
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert
+        kompose.version: 1.22.0 (955b78124)
+      creationTimestamp: null
+      labels:
+        io.kompose.service: gateway
+    spec:
+      containers:
+        - image: pingintelligence/gateway-image:latest
+          name: gateway
+          ports:
+            - containerPort: 3001
+          resources: {}
+      restartPolicy: Always
+status: {}
+http:
+  - match:
+    - {}
+    route:
+    - destination:
+        subset: v1
+        port:
+          number: 3001
+      weight: 0
+    - destination:
+        subset: v2
+        port:
+          number: 3001
+      weight: 100
