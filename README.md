@@ -3,8 +3,11 @@
   src="https://github.com/airavata-courses/PingIntelligence/blob/main/Design%20Documents/logo.JPG">
 </p>
 
-# Wiki
-Refer Wiki Page for detailed information related to all our Milestones and work
+# About
+
+![](https://github.com/airavata-courses/PingIntelligence/blob/main/Design%20Documents/Milestone3.png)
+
+Please refer Wiki Page for detailed information related to all our Milestones and work
 
 https://github.com/airavata-courses/PingIntelligence/wiki
 
