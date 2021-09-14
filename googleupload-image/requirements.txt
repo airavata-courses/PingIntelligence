@@ -26,6 +26,6 @@ PyYAML==5.4.1
 requests==2.25.1
 rsa==4.7.2
 six==1.15.0
-sqlparse==0.4.1
+sqlparse==0.4.2
 uritemplate==3.0.1
 urllib3==1.26.5
