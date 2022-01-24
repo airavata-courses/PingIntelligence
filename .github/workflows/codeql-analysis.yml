@@ -13,10 +13,46 @@ name: "CodeQL"
 
 on:
   push:
-    branches: [ main ]
+    branches: 
+    - main
+    - blue-green-deployment
+    - dockerized_upload_google
+    - dockerized_user_management
+    - dockerized_upload_management
+    - dockerized_ui
+    - milestone_1
+    - milestone_3
+    - milestone_2
+    - kubernetes_files
+    - release
+    - develop
+    - jmeter-testing
+    - automation-script
+    - dockerized_consumer_queue
+    - dockerized_consumer_queue1
+    - dockerized_gateway
+    - dockerized_metadata_search
   pull_request:
     # The branches below must be a subset of the branches above
-    branches: [ main ]
+    branches:
+    - main
+    - blue-green-deployment
+    - dockerized_upload_google
+    - dockerized_user_management
+    - dockerized_upload_management
+    - dockerized_ui
+    - milestone_1
+    - milestone_3
+    - milestone_2
+    - kubernetes_files
+    - release
+    - develop
+    - jmeter-testing
+    - automation-script
+    - dockerized_consumer_queue
+    - dockerized_consumer_queue1
+    - dockerized_gateway
+    - dockerized_metadata_search
   schedule:
     - cron: '33 15 * * 6'
 
