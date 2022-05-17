@@ -7,7 +7,7 @@
     "@testing-library/react": "^11.2.5",
     "@testing-library/user-event": "^12.7.2",
     "FileSaver": "^0.10.0",
-    "axios": "^0.21.1",
+    "axios": "^0.21.2",
     "blob-util": "^2.0.2",
     "bootstrap": "^4.6.0",
     "file-saver": "^2.0.5",
