@@ -13,7 +13,7 @@
     "file-saver": "^2.0.5",
     "firebase": "^8.2.10",
     "fs": "0.0.1-security",
-    "jszip": "^3.6.0",
+    "jszip": "^3.7.0",
     "react": "^17.0.1",
     "react-bootstrap": "^1.5.0",
     "react-bootstrap-table": "^4.3.1",
